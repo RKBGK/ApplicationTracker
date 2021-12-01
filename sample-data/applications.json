@@ -1,0 +1,25 @@
+{ 
+    "app1": {
+      "userID": "user2",
+      "firebaseKey":"app1",
+      "applicationDate": "11/30/2021",
+      "Address": "xyz",
+      "Details": "Extension Patio",
+      "DateEntered": "11/30/2021",
+      "status": "Pending",
+      "DrawingReceived" : true,
+      "feesReceived" : true
+    },
+    "app2": {
+        "userID": "user2",
+        "firebaseKey":"app2",
+        "applicationDate": "11/30/2021",
+        "Address": "xyz",
+        "Details": "Plumbing",
+        "DateEntered": "11/30/2021",
+        "status": "Pending",
+        "DrawingReceived" : true,
+        "feesReceived" : true
+      }
+  }
+  

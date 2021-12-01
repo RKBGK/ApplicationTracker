@@ -1,0 +1,16 @@
+{ 
+    "note1": {
+      "appID": "app1",
+      "firebaseKey":"note1",
+      "DateEntered": "11/30/2021",
+      "reviewerID": "user1",
+      "notes" : "Inspection completed on 12/2/2021"
+    },
+    "note2": {
+        "appID": "app2",
+        "firebaseKey":"note2",
+        "DateEntered": "11/30/2021",
+        "reviewerID": "user1",
+        "notes" : "Inspection completed on 12/2/2021"
+      }
+  }
