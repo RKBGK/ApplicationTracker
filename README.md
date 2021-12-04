@@ -17,15 +17,12 @@ ___
 Wireframs: https://www.figma.com/file/VvOt3aWhcMLN3h20Ufs3Ho/Capstone---Application-Tracking?node-id=2%3A169
 
 Issues:
-
 https://github.com/RKBGK/ApplicationTracker/issues
 
 Stretch Goals
-
 https://github.com/RKBGK/ApplicationTracker/milestone/3
 
 ERD
-
 https://dbdiagram.io/d/61a598ff8c901501c0d87b54
 
 
