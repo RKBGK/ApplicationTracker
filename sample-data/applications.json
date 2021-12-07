@@ -1,6 +1,6 @@
 { 
     "app1": {
-      "userID": "user2",
+      "employeeID": "employee2",
       "firebaseKey":"app1",
       "applicationDate": "11/30/2021",
       "Address": "xyz",
@@ -11,7 +11,7 @@
       "feesReceived" : true
     },
     "app2": {
-        "userID": "user2",
+        "employeeID": "employee2",
         "firebaseKey":"app2",
         "applicationDate": "11/30/2021",
         "Address": "xyz",
@@ -20,6 +20,28 @@
         "status": "Pending",
         "DrawingReceived" : true,
         "feesReceived" : true
-      }
+      },
+      "app3": {
+        "employeeID": "employee2",
+        "firebaseKey":"app3",
+        "applicationDate": "11/30/2021",
+        "Address": "xyz",
+        "Details": "Plumbing",
+        "DateEntered": "11/30/2021",
+        "status": "Approved",
+        "DrawingReceived" : true,
+        "feesReceived" : true
+      },
+      "app4": {
+        "employeeID": "employee2",
+        "firebaseKey":"app4",
+        "applicationDate": "11/30/2021",
+        "Address": "xyz",
+        "Details": "Plumbing",
+        "DateEntered": "11/30/2021",
+        "status": "Rejected",
+        "DrawingReceived" : true,
+        "feesReceived" : true
+      }          
   }
   
