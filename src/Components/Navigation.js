@@ -20,13 +20,13 @@ export default function Navigation({ user }) {
           </Link>
           {/* <Link className="navbar-brand" to="/application">
             Application
-          </Link>
-          <Link className="navbar-brand" to="/reportchart">
+          </Link> */}
+          {/* <Link className="navbar-brand" to="/reportchart">
             Report
-          </Link>
+          </Link> */}
           <Link className="navbar-brand" to="/appcard">
             Applications
-          </Link> */}
+          </Link>
           {user?.isAdmin ? (
             <Link className="navbar-brand" to="/employees">
               Employees

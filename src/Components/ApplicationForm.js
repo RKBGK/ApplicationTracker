@@ -78,7 +78,6 @@ export default function ApplicationForm({ appobj }) {
   };
 
   const handleChange = (e) => {
-    // setChecked(!checked);
     setFormInput((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -87,8 +86,28 @@ export default function ApplicationForm({ appobj }) {
 
   // const handleToggle = (e) => {
   //   setChecked(!checked);
-  //   handleChange(e);
+  //   const appcheck = {
+  //     email: AppForm.email,
+  //     name: AppForm.name,
+  //     address: AppForm.address,
+  //     firebaseKey: AppForm.firebaseKey,
+  //     details: AppForm.details,
+  //     status: AppForm.status,
+  //     phone: AppForm.phone,
+  //     image: AppForm.image,
+  //     drawingReceived: !AppForm.drawingReceived,
+  //     dateReceived: AppForm.dateReceived,
+  //   };
+  //   handleChange(e, appcheck);
   // };
+
+  const handleToggle = (e) => {
+    const { name, checked } = e.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -200,7 +219,7 @@ export default function ApplicationForm({ appobj }) {
                 name="drawingReceived"
                 type="checkbox"
                 checked={formInput.drawingReceived ? 'checked' : ''}
-                onChange={handleChange}
+                onChange={handleToggle}
               />
               Drawings Received?
             </label>
