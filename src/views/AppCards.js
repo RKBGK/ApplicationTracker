@@ -22,7 +22,11 @@ export default function AppCards() {
           <h1 className="text-center">All Cards</h1>
           <div className="d-flex flex-wrap">
             {cards.map((card) => (
-              <ApplicationCard key={card.firebaseKey} card={card} />
+              <ApplicationCard
+                key={card.firebaseKey}
+                card={card}
+                setCards={setCards}
+              />
             ))}
           </div>
         </>

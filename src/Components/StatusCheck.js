@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAppEmail } from '../api/data/appData';
 import ApplicationCard from './ApplicationCard';
 
@@ -9,7 +9,11 @@ const initialState = {
 export default function StatusCheck() {
   const [formInput, setFormInput] = useState(initialState);
   const [cards, setCards] = useState([]);
-
+  useEffect(() => {
+    getAppEmail(formInput.email).then((cardsArray) => {
+      setCards(cardsArray);
+    });
+  }, []);
   const resetForm = () => {
     setFormInput(initialState);
   };
@@ -21,8 +25,9 @@ export default function StatusCheck() {
       [name]: value,
     }));
   };
-  const handleSubmit = () => {
-    getAppEmail({ ...formInput }).then((cardsArray) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getAppEmail(formInput.email).then((cardsArray) => {
       setCards(cardsArray);
     });
     resetForm();
@@ -53,7 +58,11 @@ export default function StatusCheck() {
       <div className="container">
         <div className="d-flex flex-wrap">
           {cards.map((card) => (
-            <ApplicationCard key={card.firebaseKey} card={card} />
+            <ApplicationCard
+              key={card.firebaseKey}
+              card={card}
+              setCards={setCards}
+            />
           ))}
         </div>
       </div>

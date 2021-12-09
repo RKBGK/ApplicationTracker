@@ -17,6 +17,13 @@ const getAppEmail = (email) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getAppFB = (Fbkey) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseURL}/applications/${Fbkey}.json`)
+    .then((response) => resolve(response.data))
+    .catch(reject);
+});
+
 const createApp = (object) => new Promise((resolve, reject) => {
   axios
     .post(`${baseURL}/applications.json`, object)
@@ -33,7 +40,7 @@ const createApp = (object) => new Promise((resolve, reject) => {
 const deleteApp = (object) => new Promise((resolve, reject) => {
   axios
     .delete(`${baseURL}/applications/${object.firebaseKey}.json`)
-    .then(() => getAppEmail(object.uid).then(resolve))
+    .then(() => getApps().then(resolve))
     .catch(reject);
 });
 
@@ -45,5 +52,5 @@ const updateApp = (object) => new Promise((resolve, reject) => {
 });
 
 export {
-  getApps, updateApp, deleteApp, createApp, getAppEmail,
+  getApps, updateApp, deleteApp, createApp, getAppEmail, getAppFB,
 };

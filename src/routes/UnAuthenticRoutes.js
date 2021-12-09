@@ -7,6 +7,8 @@ import ApplicationForm from '../Components/ApplicationForm';
 import StatusCheck from '../Components/StatusCheck';
 import ReportChart from '../Components/ReportChart';
 import AppCards from '../views/AppCards';
+import EditApplication from '../views/EditApplication';
+import DetailApp from '../views/DetailApp';
 
 export default function UnauthenticatedRoutes() {
   return (
@@ -18,6 +20,8 @@ export default function UnauthenticatedRoutes() {
       <Route exact path="/statuscheck" component={StatusCheck} />
       <Route exact path="/reportchart" component={ReportChart} />
       <Route exact path="/appcard" component={AppCards} />
+      <Route exact path="/editapp/:firebaseKey" component={EditApplication} />
+      <Route exact path="/detailapp/:firebaseKey" component={DetailApp} />
     </Switch>
   );
 }
