@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AppNoteCard from './AppNoteCard';
-import { getAppFB } from '../api/data/appData';
+import { getAppFB, updateAppFB } from '../api/data/appData';
 import { createNote, getNotes } from '../api/data/noteData';
 
 const initialState = {
@@ -14,6 +14,7 @@ export default function AppDetail() {
   const [showForm, setShowForm] = useState(false);
   const [formNote, setFormNote] = useState(initialState);
   const { firebaseKey } = useParams();
+  const [checked, setChecked] = useState();
   useEffect(() => {
     let isMounted = true;
     getAppFB(firebaseKey).then((cardObj) => {
@@ -53,6 +54,22 @@ export default function AppDetail() {
     });
   };
 
+  const handleToggle = () => {
+    setChecked(!checked);
+    const drawingcard = {
+      email: card.email,
+      name: card.name,
+      address: card.address,
+      firebaseKey: card.firebaseKey,
+      details: card.details,
+      status: card.status,
+      phone: card.phone,
+      image: card.image,
+      drawingReceived: !card.drawingReceived,
+      dateReceived: card.dateReceived,
+    };
+    updateAppFB(drawingcard).then(setCard);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -67,6 +84,16 @@ export default function AppDetail() {
       <div className="card" style={{ width: '18rem', margin: '3px' }}>
         <div className="card-body">
           <h5 className="card-title">{card.email}</h5>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={card.drawingReceived ? 'checked' : ''}
+                onChange={handleToggle}
+              />
+              Drawing Received
+            </label>
+          </div>
           <button
             onClick={() => handleClick('addnote')}
             className="btn btn-info"
