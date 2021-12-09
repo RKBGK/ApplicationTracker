@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export default function AppDetail() {
-  //   const [formInput, setFormInput] = useState(initialState);
+  const [formInput, setFormInput] = useState(initialState);
   const [card, setCard] = useState({});
   const [noteCards, setNoteCards] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -71,30 +71,14 @@ export default function AppDetail() {
     };
     updateAppFB(drawingcard).then(setCard);
   };
+
   const handleStatus = (e) => {
-    const { name, value } = e.target;
-    const drawingcard = {
-      email: card.email,
-      name: card.name,
-      address: card.address,
-      firebaseKey: card.firebaseKey,
-      details: card.details,
-      //   status: card.status,
-      [name]: value,
-      phone: card.phone,
-      image: card.image,
-      drawingReceived: card.drawingReceived,
-      dateReceived: card.dateReceived,
-    };
-    updateAppFB(drawingcard).then(setCard);
+    setFormInput((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+    updateAppFB(formInput).then(setCard);
   };
-  //  const handleStatus = (e) => {
-  //    setFormInput((prevState) => ({
-  //       ...prevState,
-  //       [e.target.name]: e.target.value,
-  //     }));
-  //     updateAppFB(formInput).then(setCard);
-  //   };
 
   //  const handleStatus = (e) => {
   //    this.setState({ value: e.target.value });
@@ -125,20 +109,22 @@ export default function AppDetail() {
               Drawing Received
             </label>
           </div>
-          <label htmlFor="status">Status</label>
-          <select
-            id="status"
-            name="status"
-            value={card.status}
-            placeholder="Select Status"
-            onChange={handleStatus}
-          >
-            <option value="">Status</option>
-            <option value="1">Pending</option>
-            <option value="2">In-Review</option>
-            <option value="3">Rejected</option>
-            <option value="4">Approved</option>
-          </select>
+          <form>
+            <label htmlFor="dlstatus">Status</label>
+            <select
+              id="dlstatus"
+              name="dlstatus"
+              value={card.status}
+              placeholder="Select Status"
+              onChange={handleStatus}
+            >
+              <option value="">Status</option>
+              <option value="1">Pending</option>
+              <option value="2">In-Review</option>
+              <option value="3">Rejected</option>
+              <option value="4">Approved</option>
+            </select>
+          </form>
           <button
             onClick={() => handleClick('addnote')}
             className="btn btn-info"
