@@ -13,10 +13,17 @@ export default function AppNoteCard({ noteObj, setNoteCards }) {
           <h5 className="card-title">{noteObj.note}</h5>
           <button
             onClick={() => deleteNoteObj()}
+            className="btn btn-info"
+            type="button"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => deleteNoteObj()}
             className="btn btn-danger"
             type="button"
           >
-            DELETE
+            Delete
           </button>
         </div>
       </div>

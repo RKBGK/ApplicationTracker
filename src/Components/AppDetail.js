@@ -71,6 +71,7 @@ export default function AppDetail() {
     };
     updateAppFB(drawingcard).then(setCard);
   };
+  // you can use const { name, value } = e.target; and [name: value, or replace name by status at both places
   const handleStatus = (e) => {
     const { name, value } = e.target;
     const drawingcard = {
