@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import AppNoteCard from './AppNoteCard';
+import NoteCard from './NoteCard';
 import { getAppFB, updateAppFB } from '../api/data/appData';
 import { createNote, getNotes } from '../api/data/noteData';
 
@@ -173,7 +173,7 @@ export default function AppDetail() {
           )}
           <div className="d-flex flex-wrap">
             {noteCards.map((note) => (
-              <AppNoteCard
+              <NoteCard
                 key={note.firebaseKey}
                 noteObj={note}
                 setNoteCards={setNoteCards}

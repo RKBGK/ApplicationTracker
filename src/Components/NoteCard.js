@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { deleteNote } from '../api/data/noteData';
 
-export default function AppNoteCard({ noteObj, setNoteCards }) {
+export default function NoteCard({ noteObj, setNoteCards }) {
   const [showForm, setShowForm] = useState(false);
   useEffect(() => {
     let isMounted = true;
@@ -79,7 +79,7 @@ export default function AppNoteCard({ noteObj, setNoteCards }) {
     </div>
   );
 }
-AppNoteCard.propTypes = {
+NoteCard.propTypes = {
   noteObj: PropTypes.shape({
     firebaseKey: PropTypes.string,
     appId: PropTypes.string,
