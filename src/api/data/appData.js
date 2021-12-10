@@ -51,6 +51,19 @@ const updateApp = (object) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const updateAppFB = (object) => new Promise((resolve, reject) => {
+  axios
+    .patch(`${baseURL}/applications/${object.firebaseKey}.json`, object)
+    .then(() => getAppFB(object.firebaseKey).then(resolve))
+    .catch(reject);
+});
+
 export {
-  getApps, updateApp, deleteApp, createApp, getAppEmail, getAppFB,
+  getApps,
+  updateApp,
+  deleteApp,
+  createApp,
+  getAppEmail,
+  getAppFB,
+  updateAppFB,
 };

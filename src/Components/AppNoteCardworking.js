@@ -3,6 +3,20 @@ import PropTypes from 'prop-types';
 import { deleteNote } from '../api/data/noteData';
 
 export default function AppNoteCard({ noteObj, setNoteCards }) {
+  // const [showForm, setShowForm] = useState(false);
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   getAppFB(firebaseKey).then((cardObj) => {
+  //     if (isMounted) setCard(cardObj);
+  //   });
+  //   return () => {
+  //     isMounted = false;
+  //   }; // cleanup function
+  // }, []);
+
+  const editNoteObj = () => {
+    console.warn('hi');
+  };
   const deleteNoteObj = () => {
     deleteNote(noteObj).then(setNoteCards);
   };
@@ -12,11 +26,18 @@ export default function AppNoteCard({ noteObj, setNoteCards }) {
         <div className="card-body">
           <h5 className="card-title">{noteObj.note}</h5>
           <button
+            onClick={() => editNoteObj()}
+            className="btn btn-info"
+            type="button"
+          >
+            Edit
+          </button>
+          <button
             onClick={() => deleteNoteObj()}
             className="btn btn-danger"
             type="button"
           >
-            DELETE
+            Delete
           </button>
         </div>
       </div>

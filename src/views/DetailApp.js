@@ -1,14 +1,14 @@
 import React from 'react';
-import { useParams } from 'react-router';
-import AppDetail from '../Components/AppDetail';
+// import AppDetail from '../Components/AppDetail';
+import DetailAppCard from '../Components/DetailAppCard';
+import NoteCardList from '../Components/NoteCardList';
 
 export default function DetailApp() {
-  const { firebaseKey } = useParams();
   return (
     <div>
-      <h1 className="text-center">user id {firebaseKey}</h1>
-      {/* <AppDetail firebaseKey={firebaseKey} /> */}
-      <AppDetail />
+      <DetailAppCard />
+      <NoteCardList />
+      {/* <AppDetail /> */}
     </div>
   );
 }
