@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NoteCard from './NoteCard';
-import { createNote, getNotes } from '../api/data/noteData';
+import { getNotes } from '../api/data/noteData';
 
-const initialState = {
-  note: '',
-};
+// const initialState = {
+//   note: '',
+// };
 
 export default function NoteCardList() {
   const [noteCards, setNoteCards] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [formNote, setFormNote] = useState(initialState);
+  // const [showForm, setShowForm] = useState(false);
+  // const [formNote, setFormNote] = useState(initialState);
   const { firebaseKey } = useParams();
   useEffect(() => {
     let isMounted = true;
@@ -22,37 +22,37 @@ export default function NoteCardList() {
     }; // cleanup function
   }, []);
 
-  const handleClick = (method) => {
-    if (method === 'addnote') {
-      setShowForm(true);
-    }
-  };
-  const resetForm = () => {
-    setFormNote(initialState);
-  };
-  const handleSubmit = (e) => {
-    // console.warn(e.noteobj.value);
-    e.preventDefault();
-    createNote({ ...formNote, appId: firebaseKey }).then((notes) => {
-      setNoteCards(notes);
-      resetForm();
-      setShowForm(false);
-    });
-  };
+  // const handleClick = (method) => {
+  //   if (method === 'addnote') {
+  //     setShowForm(true);
+  //   }
+  // };
+  // const resetForm = () => {
+  //   setFormNote(initialState);
+  // };
+  // const handleSubmit = (e) => {
+  //   // console.warn(e.noteobj.value);
+  //   e.preventDefault();
+  //   createNote({ ...formNote, appId: firebaseKey }).then((notes) => {
+  //     setNoteCards(notes);
+  //     resetForm();
+  //     setShowForm(false);
+  //   });
+  // };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
 
-    setFormNote((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  //   setFormNote((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
 
   return (
     <div className="card" style={{ width: '18rem', margin: '3px' }}>
       <div className="card-body">
-        <button
+        {/* <button
           onClick={() => handleClick('addnote')}
           className="btn btn-info"
           type="button"
@@ -83,7 +83,7 @@ export default function NoteCardList() {
           </form>
         ) : (
           ''
-        )}
+        )} */}
         <div className="d-flex flex-wrap">
           {noteCards.map((note) => (
             <NoteCard
