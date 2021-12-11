@@ -7,16 +7,16 @@ import NoteCardList from '../Components/NoteCardList';
 export default function DetailApp() {
   const [noteCards, setNoteCards] = useState([]);
   const [editNote, setEditNote] = useState({});
+  console.warn(noteCards);
   return (
     <div>
       <DetailAppCard />
       <NoteCardForm
-        noteCards={noteCards}
         editNote={editNote}
         setNoteCards={setNoteCards}
         setEditNote={setEditNote}
       />
-      <NoteCardList />
+      <NoteCardList noteCards={noteCards} setNoteCards={setNoteCards} />
       {/* <AppDetail /> */}
     </div>
   );

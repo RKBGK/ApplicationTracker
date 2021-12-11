@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getAppFB } from '../api/data/appData';
-import { createNote } from '../api/data/noteData';
+import { createNote, updateNote } from '../api/data/noteData';
 
 const initialState = {
   note: '',
 };
 
-export default function NoteCardForm() {
+export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
   const [showForm, setShowForm] = useState(false);
   const [formNote, setFormNote] = useState(initialState);
-  const [noteCards, setNoteCards] = useState([]);
+  const [formInput, setFormInput] = useState(initialState);
+  // const [noteCards, setNoteCards] = useState([]);
   const { firebaseKey } = useParams();
+
+  useEffect(() => {
+    if (editNote.firebaseKey) {
+      setFormInput({
+        firebaseKey: editNote.firebaseKey,
+        note: editNote.note,
+      });
+    }
+  }, [editNote]);
+
   useEffect(() => {
     let isMounted = true;
     console.warn(firebaseKey);
@@ -24,6 +36,18 @@ export default function NoteCardForm() {
     }; // cleanup function
   }, []);
 
+  //  useEffect(() => {
+  //  let isMounted = true;
+  //  console.warn(firebaseKey);
+  //  console.warn(noteCards);
+  //  getAppFB(firebaseKey).then((notes) => {
+  //     if (isMounted) setNoteCards(notes);
+  //   });
+  //   return () => {
+  //     isMounted = false;
+  //   }; // cleanup function
+  //   }, []);
+
   const handleClick = (method) => {
     if (method === 'addnote') {
       setShowForm(true);
@@ -35,11 +59,17 @@ export default function NoteCardForm() {
   const handleSubmit = (e) => {
     // console.warn(e.noteobj.value);
     e.preventDefault();
-    createNote({ ...formNote, appId: firebaseKey }).then((notes) => {
-      setNoteCards(notes);
-      resetForm();
-      setShowForm(false);
-    });
+    if (editNote.firebaseKey) {
+      updateNote(formInput).then(() => {
+        resetForm();
+      });
+    } else {
+      createNote({ ...formNote, appId: firebaseKey }).then((notes) => {
+        setNoteCards(notes);
+        resetForm();
+        setShowForm(false);
+      });
+    }
   };
 
   const handleChange = (e) => {
@@ -90,3 +120,15 @@ export default function NoteCardForm() {
     </div>
   );
 }
+
+NoteCardForm.propTypes = {
+  editNote: PropTypes.shape(PropTypes.obj),
+  noteCards: PropTypes.func,
+  setNoteCards: PropTypes,
+};
+
+NoteCardForm.defaultProps = {
+  editNote: {},
+  noteCards: null,
+  setNoteCards: null,
+};
