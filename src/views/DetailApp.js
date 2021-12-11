@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import { getNotes } from '../api/data/noteData';
 // import AppDetail from '../Components/AppDetail';
 import DetailAppCard from '../Components/DetailAppCard';
 import NoteCardForm from '../Components/NoteCardForm';
@@ -7,7 +9,12 @@ import NoteCardList from '../Components/NoteCardList';
 export default function DetailApp() {
   const [noteCards, setNoteCards] = useState([]);
   const [editNote, setEditNote] = useState({});
-  console.warn(noteCards);
+  const { firebaseKey } = useParams();
+  useEffect(() => {
+    getNotes(firebaseKey).then(setNoteCards);
+  }, []);
+  console.warn(noteCards, editNote);
+
   return (
     <div>
       <DetailAppCard />
@@ -16,7 +23,7 @@ export default function DetailApp() {
         setNoteCards={setNoteCards}
         setEditNote={setEditNote}
       />
-      <NoteCardList noteCards={noteCards} setNoteCards={setNoteCards} />
+      <NoteCardList setEditNote={setEditNote} />
       {/* <AppDetail /> */}
     </div>
   );

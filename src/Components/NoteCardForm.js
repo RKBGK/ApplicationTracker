@@ -11,13 +11,15 @@ const initialState = {
 export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
   const [showForm, setShowForm] = useState(false);
   const [formNote, setFormNote] = useState(initialState);
-  const [formInput, setFormInput] = useState(initialState);
+  // const [formInput, setFormInput] = useState(initialState);
   // const [noteCards, setNoteCards] = useState([]);
   const { firebaseKey } = useParams();
+  console.warn(editNote);
 
   useEffect(() => {
     if (editNote.firebaseKey) {
-      setFormInput({
+      setFormNote({
+        appId: editNote.appId,
         firebaseKey: editNote.firebaseKey,
         note: editNote.note,
       });
@@ -26,27 +28,16 @@ export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
 
   useEffect(() => {
     let isMounted = true;
-    console.warn(firebaseKey);
     console.warn(noteCards);
     getAppFB(firebaseKey).then((notes) => {
-      if (isMounted) setNoteCards(notes);
+      if (isMounted) {
+        setNoteCards(notes);
+      }
     });
     return () => {
       isMounted = false;
     }; // cleanup function
   }, []);
-
-  //  useEffect(() => {
-  //  let isMounted = true;
-  //  console.warn(firebaseKey);
-  //  console.warn(noteCards);
-  //  getAppFB(firebaseKey).then((notes) => {
-  //     if (isMounted) setNoteCards(notes);
-  //   });
-  //   return () => {
-  //     isMounted = false;
-  //   }; // cleanup function
-  //   }, []);
 
   const handleClick = (method) => {
     if (method === 'addnote') {
@@ -60,8 +51,10 @@ export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
     // console.warn(e.noteobj.value);
     e.preventDefault();
     if (editNote.firebaseKey) {
-      updateNote(formInput).then(() => {
+      updateNote(formNote).then((notes) => {
+        setNoteCards(notes);
         resetForm();
+        setShowForm(false);
       });
     } else {
       createNote({ ...formNote, appId: firebaseKey }).then((notes) => {
@@ -124,11 +117,10 @@ export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
 NoteCardForm.propTypes = {
   editNote: PropTypes.shape(PropTypes.obj),
   noteCards: PropTypes.func,
-  setNoteCards: PropTypes,
+  setNoteCards: PropTypes.func.isRequired,
 };
 
 NoteCardForm.defaultProps = {
   editNote: {},
   noteCards: null,
-  setNoteCards: null,
 };
