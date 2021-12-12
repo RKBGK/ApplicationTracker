@@ -13,8 +13,7 @@ export default function DetailApp() {
   useEffect(() => {
     getNotes(firebaseKey).then(setNoteCards);
   }, []);
-  console.warn(noteCards, editNote);
-
+  console.warn(noteCards);
   return (
     <div>
       <DetailAppCard />
@@ -23,7 +22,11 @@ export default function DetailApp() {
         setNoteCards={setNoteCards}
         setEditNote={setEditNote}
       />
-      <NoteCardList setEditNote={setEditNote} />
+      <NoteCardList
+        setEditNote={setEditNote}
+        noteCards={noteCards}
+        setNoteCards={setNoteCards}
+      />
       {/* <AppDetail /> */}
     </div>
   );

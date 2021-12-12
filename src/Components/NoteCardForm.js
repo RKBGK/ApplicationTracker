@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getAppFB } from '../api/data/appData';
-import { createNote, updateNote } from '../api/data/noteData';
+import { createNote, getNotes, updateNote } from '../api/data/noteData';
 
 const initialState = {
   note: '',
@@ -27,16 +27,12 @@ export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
   }, [editNote]);
 
   useEffect(() => {
-    let isMounted = true;
     console.warn(noteCards);
-    getAppFB(firebaseKey).then((notes) => {
-      if (isMounted) {
+    getAppFB(firebaseKey).then((appObj) => {
+      getNotes(appObj.appId).then((notes) => {
         setNoteCards(notes);
-      }
+      });
     });
-    return () => {
-      isMounted = false;
-    }; // cleanup function
   }, []);
 
   const handleClick = (method) => {
