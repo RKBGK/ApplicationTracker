@@ -13,7 +13,6 @@ export default function DetailApp() {
   useEffect(() => {
     getNotes(firebaseKey).then(setNoteCards);
   }, []);
-  console.warn(noteCards);
   return (
     <div>
       <DetailAppCard />
