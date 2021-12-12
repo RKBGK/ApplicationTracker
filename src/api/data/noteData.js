@@ -33,7 +33,7 @@ const deleteNote = (noteObj) => new Promise((resolve, reject) => {
 const updateNote = (noteObj) => new Promise((resolve, reject) => {
   axios
     .patch(`${baseURL}/notes/${noteObj.firebaseKey}.json`, noteObj)
-    .then(() => getNotes(noteObj.appID).then(resolve))
+    .then(() => getNotes(noteObj.appId).then(resolve))
     .catch(reject);
 });
 
