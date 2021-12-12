@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import NoteCard from './NoteCard';
 import { getNotes } from '../api/data/noteData';
 
-// const initialState = {
-//   note: '',
-// };
-
-export default function NoteCardList({ setEditNote }) {
-  const [noteCards, setNoteCards] = useState([]);
+export default function NoteCardList({ setEditNote, noteCards, setNoteCards }) {
+  // const [noteCards, setNoteCards] = useState([]);
   const { firebaseKey } = useParams();
+  console.warn('NoteCardList', firebaseKey);
+  // debugger;
   useEffect(() => {
     let isMounted = true;
     getNotes(firebaseKey).then((notes) => {
@@ -20,6 +18,10 @@ export default function NoteCardList({ setEditNote }) {
       isMounted = false;
     }; // cleanup function
   }, []);
+
+  // useEffect(() => {
+  //   setNoteCards(noteCards);
+  // }, []);
 
   return (
     <div className="card" style={{ width: '18rem', margin: '3px' }}>
@@ -40,5 +42,7 @@ export default function NoteCardList({ setEditNote }) {
 }
 
 NoteCardList.propTypes = {
+  noteCards: PropTypes.arrayOf(PropTypes.object).isRequired,
   setEditNote: PropTypes.func.isRequired,
+  setNoteCards: PropTypes.func.isRequired,
 };
