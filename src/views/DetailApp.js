@@ -22,9 +22,9 @@ export default function DetailApp() {
         setEditNote={setEditNote}
       />
       <NoteCardList
-        setEditNote={setEditNote}
         noteCards={noteCards}
         setNoteCards={setNoteCards}
+        setEditNote={setEditNote}
       />
       {/* <AppDetail /> */}
     </div>

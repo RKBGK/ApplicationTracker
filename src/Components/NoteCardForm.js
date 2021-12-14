@@ -8,7 +8,7 @@ const initialState = {
   note: '',
 };
 
-export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
+export default function NoteCardForm({ editNote, setEditNote, setNoteCards }) {
   const [formNote, setFormNote] = useState(initialState);
   const { firebaseKey } = useParams();
 
@@ -23,7 +23,7 @@ export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
   }, [editNote]);
 
   useEffect(() => {
-    console.warn(noteCards);
+    console.warn(setEditNote);
     getAppFB(firebaseKey).then((appObj) => {
       getNotes(appObj.appId).then((notes) => {
         setNoteCards(notes);
@@ -78,7 +78,7 @@ export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
           </div>
           <div className="m-3">
             <button type="submit" className="btn btn-success">
-              Submit
+              {editNote?.firebaseKey ? 'Update Note' : 'Add Note'}
             </button>
           </div>
         </form>
@@ -89,11 +89,11 @@ export default function NoteCardForm({ editNote, noteCards, setNoteCards }) {
 
 NoteCardForm.propTypes = {
   editNote: PropTypes.shape(PropTypes.obj),
-  noteCards: PropTypes.func,
+  setEditNote: PropTypes.func,
   setNoteCards: PropTypes.func.isRequired,
 };
 
 NoteCardForm.defaultProps = {
   editNote: {},
-  noteCards: null,
+  setEditNote: null,
 };

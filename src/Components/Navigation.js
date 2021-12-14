@@ -24,24 +24,28 @@ export default function Navigation({ user }) {
           {/* <Link className="navbar-brand" to="/reportchart">
             Report
           </Link> */}
-          <Link className="navbar-brand" to="/appcard">
-            Applications
-          </Link>
-          {user?.isAdmin ? (
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+            <Link className="navbar-brand" to="/appcard">
+              Applications
+            </Link>
+          ) : (
+            ''
+          )}
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Link className="navbar-brand" to="/employees">
               Employees
             </Link>
           ) : (
             ''
           )}
-          {user?.isAdmin ? (
-            <Link className="navbar-brand" to="/review">
-              Review
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+            <Link className="navbar-brand" to="/summary">
+              Summary
             </Link>
           ) : (
             ''
           )}
-          {user?.isAdmin ? (
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Link className="navbar-brand" to="/reports">
               Reports
             </Link>
@@ -73,7 +77,7 @@ Navigation.propTypes = {
   user: PropTypes.shape({
     fullName: PropTypes.string,
     uid: PropTypes.string,
-    isAdmin: PropTypes.bool,
+    role: PropTypes.string,
   }),
 };
 

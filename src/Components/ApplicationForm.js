@@ -5,28 +5,6 @@ import { Form, Row } from 'react-bootstrap';
 // import { Dropdown } from 'semantic-ui-react';
 import { updateApp, createApp } from '../api/data/appData';
 
-// const statusOptions = [
-//   {
-//     key: 1,
-//     text: 'Pending',
-//     value: 1,
-//   },
-//   {
-//     key: 2,
-//     text: 'In-Process',
-//     value: 2,
-//   },
-//   {
-//     key: 3,
-//     text: 'Rejected',
-//     value: 3,
-//   },
-//   {
-//     key: 4,
-//     text: 'Approveded',
-//     value: 4,
-//   },
-// ];
 const AppForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -52,7 +30,7 @@ const initialState = {
   dateReceived: today,
 };
 
-export default function ApplicationForm({ appobj }) {
+export default function ApplicationForm({ appobj, user }) {
   const [formInput, setFormInput] = useState(initialState);
   const [showForm, setShowForm] = useState(true);
   // const [checked, setChecked] = useState();
@@ -83,23 +61,6 @@ export default function ApplicationForm({ appobj }) {
       [e.target.name]: e.target.value,
     }));
   };
-
-  // const handleToggle = (e) => {
-  //   setChecked(!checked);
-  //   const appcheck = {
-  //     email: AppForm.email,
-  //     name: AppForm.name,
-  //     address: AppForm.address,
-  //     firebaseKey: AppForm.firebaseKey,
-  //     details: AppForm.details,
-  //     status: AppForm.status,
-  //     phone: AppForm.phone,
-  //     image: AppForm.image,
-  //     drawingReceived: !AppForm.drawingReceived,
-  //     dateReceived: AppForm.dateReceived,
-  //   };
-  //   handleChange(e, appcheck);
-  // };
 
   const handleToggle = (e) => {
     const { name, checked } = e.target;
@@ -196,23 +157,28 @@ export default function ApplicationForm({ appobj }) {
               />
             </Form.Group>
           </Row>
-          <Row className="mb-3 d-flex" width="75%">
-            <label htmlFor="status">Status</label>
-            <select
-              id="status"
-              name="status"
-              value={formInput.status}
-              placeholder="Select Status"
-              onChange={handleChange}
-            >
-              <option value="">Status</option>
-              <option value="1">Pending</option>
-              <option value="2">In-Review</option>
-              <option value="3">Rejected</option>
-              <option value="4">Approved</option>
-            </select>
-          </Row>
-          <div>
+          {user ? <h5>{user.role}</h5> : ''}
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+            <Row className="mb-3 d-flex" width="75%">
+              <label htmlFor="status">Status</label>
+              <select
+                id="status"
+                name="status"
+                value={formInput.status}
+                placeholder="Select Status"
+                onChange={handleChange}
+              >
+                <option value="">Status</option>
+                <option value="1">Pending</option>
+                <option value="2">In-Review</option>
+                <option value="3">Rejected</option>
+                <option value="4">Approved</option>
+              </select>
+            </Row>
+          ) : (
+            ''
+          )}
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <label htmlFor="drawingReceived">
               <input
                 id="drawingReceived"
@@ -223,33 +189,26 @@ export default function ApplicationForm({ appobj }) {
               />
               Drawings Received?
             </label>
-          </div>
-          {/* <Row className="mb-3 d-flex" width="75%">
-            <Form.Group>
-              <Form.Label htmlFor="drawingReceived">Drawing Received</Form.Label>
-              <Form.Control
-                id="drawingReceived"
-                name="drawingReceived"
-                type="checkbox"
-                value={formInput.drawing}
-                checked={formInput.drawing ? 'checked' : ''}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Row> */}
-          <Row className="mb-3 d-flex" width="75%">
-            <Form.Group>
-              <Form.Label htmlFor="dateReceived">Date Received</Form.Label>
-              <Form.Control
-                id="dateReceived"
-                name="dateReceived"
-                type="text"
-                value={formInput.dateReceived}
-                onChange={handleChange}
-                style={{ width: '75%' }}
-              />
-            </Form.Group>
-          </Row>
+          ) : (
+            ''
+          )}
+          {user?.role === 'Admin' || user.role === 'Staff' ? (
+            <Row className="mb-3 d-flex" width="75%">
+              <Form.Group>
+                <Form.Label htmlFor="dateReceived">Date Received</Form.Label>
+                <Form.Control
+                  id="dateReceived"
+                  name="dateReceived"
+                  type="text"
+                  value={formInput.dateReceived}
+                  onChange={handleChange}
+                  style={{ width: '75%' }}
+                />
+              </Form.Group>
+            </Row>
+          ) : (
+            ''
+          )}
           <div className="mb-3 d-flex">
             <button className="btn btn-success" type="submit">
               {appobj?.firebaseKey ? 'Update' : 'Submit'}
@@ -276,8 +235,10 @@ ApplicationForm.propTypes = {
     drawingReceived: PropTypes.bool,
     dateReceived: PropTypes.string,
   }),
+  user: PropTypes.shape(PropTypes.obj),
 };
 
 ApplicationForm.defaultProps = {
   appobj: {},
+  user: {},
 };

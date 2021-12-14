@@ -5,7 +5,7 @@ import { deleteApp } from '../api/data/appData';
 
 // import { useHistory } from 'react-router';
 
-export default function ApplicationCard({ card, setCards }) {
+export default function ApplicationCard({ card, setCards, user }) {
   const renderSwitch = () => {
     switch (card.status) {
       case '1':
@@ -34,23 +34,48 @@ export default function ApplicationCard({ card, setCards }) {
           <h5 className="card-title">{card.name}</h5>
           <h5 className="card-title">{card.address}</h5>
           <h5 className="card-title">{card.email}</h5>
+          <h5 className="card-title">{card.status}</h5>
           <h5 className="card-title">{renderSwitch(card.status)}</h5>
-          <Link to={`/editapp/${card.firebaseKey}`} className="btn btn-warning">
-            Edit
-          </Link>
+          {user ? <h5>Role - {user.role}</h5> : 'No Role'}
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+            <Link
+              to={`/editapp/${card.firebaseKey}`}
+              className="btn btn-warning"
+            >
+              Edit
+            </Link>
+          ) : (
+            ''
+          )}
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+            <Link
+              to={`/detailapp/${card.firebaseKey}`}
+              className="btn btn-warning"
+            >
+              Detail
+            </Link>
+          ) : (
+            ''
+          )}
           <Link
             to={`/detailapp/${card.firebaseKey}`}
             className="btn btn-warning"
           >
             Detail
           </Link>
-          <button
-            onClick={() => handleClick('delete')}
-            className="btn btn-danger"
-            type="button"
-          >
-            DELETE
-          </button>
+          <div>
+            {card.status === '1' ? (
+              <button
+                onClick={() => handleClick('delete')}
+                className="btn btn-danger"
+                type="button"
+              >
+                DELETE
+              </button>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -60,4 +85,9 @@ export default function ApplicationCard({ card, setCards }) {
 ApplicationCard.propTypes = {
   card: PropTypes.shape(PropTypes.obj).isRequired,
   setCards: PropTypes.func.isRequired,
+  user: PropTypes.shape(PropTypes.obj),
+};
+
+ApplicationCard.defaultProps = {
+  user: null,
 };
