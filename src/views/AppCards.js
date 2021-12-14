@@ -17,20 +17,20 @@ export default function AppCards({ user }) {
     }; // cleanup function
   }, []);
 
-  // const renderSwitch = (status) => {
-  //   switch (status) {
-  //     case '1':
-  //       return 'Pending';
-  //     case '2':
-  //       return 'In-Review';
-  //     case '3':
-  //       return 'Rejected';
-  //     case '4':
-  //       return 'Approved';
-  //     default:
-  //       return status;
-  //   }
-  // };
+  const renderSwitch = (status) => {
+    switch (status) {
+      case '1':
+        return 'Pending';
+      case '2':
+        return 'In-Review';
+      case '3':
+        return 'Rejected';
+      case '4':
+        return 'Approved';
+      default:
+        return status;
+    }
+  };
 
   const categoryGroups = () => {
     const sortedObj = cards.reduce((cardObject, currentObject) => {
@@ -49,29 +49,6 @@ export default function AppCards({ user }) {
     categoryGroups();
   }, [cards]);
 
-  // const sumStat = () => {
-  //   const data = [];
-  //   for (const stat of cards) {
-  //     let entryFound = false;
-  //     const tempObj = {
-  //       name: stat.status,
-  //       count: 1,
-  //     };
-  //     for (const item of data) {
-  //       if (item.name === tempObj.name) {
-  //         item.count += 1;
-  //         entryFound = true;
-  //         break;
-  //       }
-  //     }
-
-  //     if (!entryFound) {
-  //       data.push(tempObj);
-  //     }
-  //   }
-  // };
-  // console.warn(sumStat);
-
   return (
     <div className="container">
       {user ? (
@@ -82,8 +59,8 @@ export default function AppCards({ user }) {
       <div>
         {Object.keys(categorizedCards).map((status) => (
           <div key={status}>
-            <h4>Status {status}</h4>
-            {/* <h4>{renderSwitch(categorizedCards[status])}</h4> */}
+            <h4>{renderSwitch(status)}</h4>
+            <h4>{status}</h4>
             {categorizedCards[status].map((card) => (
               <ApplicationCard
                 key={card.firebaseKey}
@@ -95,28 +72,6 @@ export default function AppCards({ user }) {
           </div>
         ))}
       </div>
-      {/* {cards ? (
-        <>
-          <h1 className="text-center">All Cards</h1>
-          {user ? (
-            <h5>Role - {user.role}</h5>
-          ) : (
-            'No Role Appcards'
-          )}
-          <div className="d-flex flex-wrap">
-            {cards.map((card) => (
-              <ApplicationCard
-                key={card.firebaseKey}
-                card={card}
-                setCards={setCards}
-                user={user}
-              />
-            ))}
-          </div>
-        </>
-      ) : (
-        'Add a card'
-      )} */}
     </div>
   );
 }

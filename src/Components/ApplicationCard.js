@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { deleteApp } from '../api/data/appData';
+import { deleteApp, getAppEmail } from '../api/data/appData';
 
 // import { useHistory } from 'react-router';
 
@@ -21,11 +21,26 @@ export default function ApplicationCard({ card, setCards, user }) {
     }
   };
 
+  // const handleClick = (method) => {
+  //   if (method === 'delete') {
+  //     deleteApp(card).then(setCards);
+  //   }
+  // };
+
   const handleClick = (method) => {
     if (method === 'delete') {
-      deleteApp(card).then(setCards);
+      deleteApp(card).then(() => {
+        getAppEmail(card.email).then((apps) => {
+          setCards(apps);
+        });
+      });
     }
   };
+  // getAppFB(firebaseKey).then((appObj) => {
+  //   getNotes(appObj.appId).then((notes) => {
+  //     setNoteCards(notes);
+  //   });
+  // });
 
   return (
     <div>
@@ -37,7 +52,7 @@ export default function ApplicationCard({ card, setCards, user }) {
           <h5 className="card-title">{card.status}</h5>
           <h5 className="card-title">{renderSwitch(card.status)}</h5>
           {user ? <h5>Role - {user.role}</h5> : 'No Role'}
-          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+          {user?.role !== 'Client' ? (
             <Link
               to={`/editapp/${card.firebaseKey}`}
               className="btn btn-warning"
@@ -57,12 +72,6 @@ export default function ApplicationCard({ card, setCards, user }) {
           ) : (
             ''
           )}
-          <Link
-            to={`/detailapp/${card.firebaseKey}`}
-            className="btn btn-warning"
-          >
-            Detail
-          </Link>
           <div>
             {card.status === '1' ? (
               <button

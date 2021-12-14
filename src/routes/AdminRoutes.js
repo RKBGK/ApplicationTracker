@@ -16,7 +16,7 @@ export default function AdminRoutes({ user }) {
       <Route exact path="/summary" component={Summary} />
       <Route exact path="/reports" component={Reports} />
       <Route exact path="/reportchart" component={ReportChart} />
-      <Route exact path="/appcard" component={AppCards} user={user} />
+      <Route exact path="/appcard" component={() => <AppCards user={user} />} />
       <Route exact path="/editapp/:firebaseKey" component={EditApplication} />
       <Route exact path="/detailapp/:firebaseKey" component={DetailApp} />
     </Switch>

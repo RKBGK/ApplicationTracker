@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Form, Row } from 'react-bootstrap';
@@ -33,6 +34,7 @@ const initialState = {
 export default function ApplicationForm({ appobj, user }) {
   const [formInput, setFormInput] = useState(initialState);
   const [showForm, setShowForm] = useState(true);
+  const history = useHistory();
   // const [checked, setChecked] = useState();
   useEffect(() => {
     if (appobj.firebaseKey) {
@@ -62,13 +64,13 @@ export default function ApplicationForm({ appobj, user }) {
     }));
   };
 
-  const handleToggle = (e) => {
-    const { name, checked } = e.target;
-    setFormInput((prevState) => ({
-      ...prevState,
-      [name]: checked,
-    }));
-  };
+  // const handleToggle = (e) => {
+  //   const { name, checked } = e.target;
+  //   setFormInput((prevState) => ({
+  //     ...prevState,
+  //     [name]: checked,
+  //   }));
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -83,6 +85,7 @@ export default function ApplicationForm({ appobj, user }) {
     }
     setShowForm(false);
   };
+  console.warn(user);
   return (
     <div>
       {showForm ? (
@@ -157,8 +160,7 @@ export default function ApplicationForm({ appobj, user }) {
               />
             </Form.Group>
           </Row>
-          {user ? <h5>{user.role}</h5> : ''}
-          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+          {/* {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Row className="mb-3 d-flex" width="75%">
               <label htmlFor="status">Status</label>
               <select
@@ -177,8 +179,8 @@ export default function ApplicationForm({ appobj, user }) {
             </Row>
           ) : (
             ''
-          )}
-          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+          )} */}
+          {/* {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <label htmlFor="drawingReceived">
               <input
                 id="drawingReceived"
@@ -191,8 +193,8 @@ export default function ApplicationForm({ appobj, user }) {
             </label>
           ) : (
             ''
-          )}
-          {user?.role === 'Admin' || user.role === 'Staff' ? (
+          )} */}
+          {/* {user?.role === 'Admin' || user.role === 'Staff' ? (
             <Row className="mb-3 d-flex" width="75%">
               <Form.Group>
                 <Form.Label htmlFor="dateReceived">Date Received</Form.Label>
@@ -208,10 +210,17 @@ export default function ApplicationForm({ appobj, user }) {
             </Row>
           ) : (
             ''
-          )}
+          )} */}
           <div className="mb-3 d-flex">
             <button className="btn btn-success" type="submit">
               {appobj?.firebaseKey ? 'Update' : 'Submit'}
+            </button>
+            <button
+              onClick={() => history.push('/home')}
+              className="btn btn-danger"
+              type="button"
+            >
+              Cancel
             </button>
           </div>
         </AppForm>

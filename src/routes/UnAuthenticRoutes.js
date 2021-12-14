@@ -16,8 +16,7 @@ export default function UnauthenticatedRoutes({ user }) {
       <Route
         exact
         path="/application"
-        component={ApplicationForm}
-        user={user}
+        component={() => <ApplicationForm user={user} />}
       />
       <Route exact path="/statuscheck" component={StatusCheck} user={user} />
     </Switch>

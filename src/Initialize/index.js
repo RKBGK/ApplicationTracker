@@ -16,6 +16,7 @@ function Initialize() {
             uid: authed.uid,
             role: authed.role,
             email: authed.email,
+            firebaseKey: authed.firebaseKey,
           };
           if (response === 'create user') {
             const newUserOnj = {
