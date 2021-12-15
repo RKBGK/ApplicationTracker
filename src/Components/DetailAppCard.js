@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { getAppFB, updateAppFB } from '../api/data/appData';
+
+const Hstyle = styled.form`
+  h5 {
+    margin: 0;
+    padding: 0;
+  }
+`;
 
 export default function DetailAppCard() {
   const [card, setCard] = useState({});
@@ -52,10 +60,12 @@ export default function DetailAppCard() {
   };
   return (
     <div>
-      <div className="card" style={{ width: '18rem', margin: '3px' }}>
+      <div className="card" style={{ width: '18rem', margin: '30px' }}>
         <div className="card-body">
-          <h5 className="card-title">{card.email}</h5>
-          <h5 className="card-title">{card.status}</h5>
+          <Hstyle className="card-title">{card.name}</Hstyle>
+          <Hstyle className="card-title">{card.address}</Hstyle>
+          <Hstyle className="card-title">{card.email}</Hstyle>
+          <Hstyle className="card-title">{card.details}</Hstyle>
           <div>
             <label>
               <input

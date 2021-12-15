@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Icon } from 'semantic-ui-react';
 import { deleteNote } from '../api/data/noteData';
 
 export default function NoteCard({ noteObj, setNoteCards, setEditNote }) {
@@ -10,7 +11,7 @@ export default function NoteCard({ noteObj, setNoteCards, setEditNote }) {
 
   return (
     <div>
-      <div className="card" style={{ width: '18rem', margin: '3px' }}>
+      <div className="card" style={{ width: '18rem', margin: '30px' }}>
         <div className="card-body">
           <h5 className="card-title">{noteObj.note}</h5>
           <button
@@ -18,14 +19,14 @@ export default function NoteCard({ noteObj, setNoteCards, setEditNote }) {
             className="btn btn-info"
             type="button"
           >
-            Edit Note
+            <Icon name="edit" />
           </button>
           <button
             onClick={() => deleteNoteObj()}
             className="btn btn-danger"
             type="button"
           >
-            Delete
+            <Icon name="trash" />
           </button>
         </div>
       </div>

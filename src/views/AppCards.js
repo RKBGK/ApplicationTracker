@@ -6,7 +6,6 @@ import ApplicationCard from '../Components/ApplicationCard';
 export default function AppCards({ user }) {
   const [cards, setCards] = useState([]);
   const [categorizedCards, setCategorizedCards] = useState({});
-  const userRole = user.role;
 
   useEffect(() => {
     let isMounted = true;
@@ -52,16 +51,10 @@ export default function AppCards({ user }) {
 
   return (
     <div className="container">
-      {user ? (
-        <h5>Role APP CARD VIEW new val - {userRole}</h5>
-      ) : (
-        ' Role APP CARD VIEW-No Role'
-      )}
       <div>
         {Object.keys(categorizedCards).map((status) => (
           <div key={status}>
-            <h4>{renderSwitch(status)}</h4>
-            <h4>{status}</h4>
+            <h2>{renderSwitch(status)}</h2>
             {categorizedCards[status].map((card) => (
               <ApplicationCard
                 key={card.firebaseKey}

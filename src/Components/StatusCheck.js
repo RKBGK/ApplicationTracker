@@ -3,7 +3,7 @@ import { getAppEmail } from '../api/data/appData';
 import ApplicationCard from './ApplicationCard';
 
 const initialState = {
-  email: '',
+  email: 'none',
 };
 
 export default function StatusCheck() {

@@ -17,7 +17,11 @@ export default function DetailApp() {
   return (
     <div>
       <DetailAppCard />
-      <NoteCardForm editNote={editNote} setNoteCards={setNoteCards} />
+      <NoteCardForm
+        editNote={editNote}
+        setNoteCards={setNoteCards}
+        setEditNote={setEditNote}
+      />
       <NoteCardList
         noteCards={noteCards}
         setNoteCards={setNoteCards}

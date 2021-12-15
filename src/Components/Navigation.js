@@ -3,12 +3,18 @@ import { Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { signOutUser, signInUser } from '../api/auth';
+import Homeconstruction from '../Images/Logo.jpg';
 
 export default function Navigation({ user }) {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
+      <nav className="navbar navbar-expand-lg navbar-light bg-info">
+        <div
+          className="navbar-brand container-fluid"
+          href="#"
+          style={{ width: '5', height: '5' }}
+        >
+          <img src={Homeconstruction} alt="construction" />
           <Link className="navbar-brand" to="/">
             Home
           </Link>

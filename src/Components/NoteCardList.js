@@ -18,19 +18,15 @@ export default function NoteCardList({ setEditNote, noteCards, setNoteCards }) {
   }, []);
 
   return (
-    <div className="card" style={{ width: '18rem', margin: '3px' }}>
-      <div className="card-body">
-        <div className="d-flex flex-wrap">
-          {noteCards.map((note) => (
-            <NoteCard
-              key={note.firebaseKey}
-              noteObj={note}
-              setNoteCards={setNoteCards}
-              setEditNote={setEditNote}
-            />
-          ))}
-        </div>
-      </div>
+    <div className="notecard">
+      {noteCards.map((note) => (
+        <NoteCard
+          key={note.firebaseKey}
+          noteObj={note}
+          setNoteCards={setNoteCards}
+          setEditNote={setEditNote}
+        />
+      ))}
     </div>
   );
 }

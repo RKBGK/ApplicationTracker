@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { deleteApp, getAppEmail } from '../api/data/appData';
+import styled from 'styled-components';
+import { deleteApp, getAppEmail, getApps } from '../api/data/appData';
 
-// import { useHistory } from 'react-router';
+const Hstyle = styled.form`
+  h5 {
+    margin: 0;
+    padding: 0;
+  }
+`;
 
 export default function ApplicationCard({ card, setCards, user }) {
   const renderSwitch = () => {
@@ -29,11 +36,17 @@ export default function ApplicationCard({ card, setCards, user }) {
 
   const handleClick = (method) => {
     if (method === 'delete') {
-      deleteApp(card).then(() => {
-        getAppEmail(card.email).then((apps) => {
-          setCards(apps);
+      if (user != null && user.role !== 'Client') {
+        deleteApp(card).then(() => {
+          getApps().then(setCards);
         });
-      });
+      } else {
+        deleteApp(card).then(() => {
+          getAppEmail(card.email).then((apps) => {
+            setCards(apps);
+          });
+        });
+      }
     }
   };
   // getAppFB(firebaseKey).then((appObj) => {
@@ -46,46 +59,39 @@ export default function ApplicationCard({ card, setCards, user }) {
     <div>
       <div className="card" style={{ width: '18rem', margin: '3px' }}>
         <div className="card-body">
-          <h5 className="card-title">{card.name}</h5>
-          <h5 className="card-title">{card.address}</h5>
-          <h5 className="card-title">{card.email}</h5>
-          <h5 className="card-title">{card.status}</h5>
-          <h5 className="card-title">{renderSwitch(card.status)}</h5>
-          {(user != null && user.role === 'Admin')
-          || (user != null && user.role === 'Staff') ? (
-            <Link
-              to={`/editapp/${card.firebaseKey}`}
-              className="btn btn-warning"
-            >
-              Edit
+          <Hstyle className="card-title">{card.name}</Hstyle>
+          <Hstyle className="card-title">{card.address}</Hstyle>
+          <Hstyle className="card-title">{card.email}</Hstyle>
+          <Hstyle className="card-title">{renderSwitch(card.status)}</Hstyle>
+          {user?.role !== 'Client' ? (
+            <Link to={`/editapp/${card.firebaseKey}`} className="btn btn-light">
+              <Icon name="edit" />
             </Link>
-            ) : (
-              ''
-            )}
-          {(user != null && user.role === 'Admin')
-          || (user != null && user.role === 'Staff') ? (
+          ) : (
+            ''
+          )}
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Link
               to={`/detailapp/${card.firebaseKey}`}
-              className="btn btn-warning"
+              className="btn btn-light"
             >
-              Detail
+              <Icon name="file outline" />
             </Link>
-            ) : (
-              ''
-            )}
-          <div>
-            {card.status === '1' ? (
-              <button
-                onClick={() => handleClick('delete')}
-                className="btn btn-danger"
-                type="button"
-              >
-                DELETE
-              </button>
-            ) : (
-              ''
-            )}
-          </div>
+          ) : (
+            ''
+          )}
+
+          {card.status === '1' ? (
+            <button
+              onClick={() => handleClick('delete')}
+              className="btn btn-danger"
+              type="button"
+            >
+              <Icon name="trash" />
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>
