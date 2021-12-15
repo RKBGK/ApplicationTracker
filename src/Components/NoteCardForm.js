@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getAppFB } from '../api/data/appData';
+// import { getAppFB } from '../api/data/appData';
 import { createNote, getNotes, updateNote } from '../api/data/noteData';
 
 const initialState = {
   note: '',
 };
 
-export default function NoteCardForm({ editNote, setEditNote, setNoteCards }) {
+export default function NoteCardForm({ editNote, setNoteCards }) {
   const [formNote, setFormNote] = useState(initialState);
   const { firebaseKey } = useParams();
 
@@ -19,17 +19,9 @@ export default function NoteCardForm({ editNote, setEditNote, setNoteCards }) {
         firebaseKey: editNote.firebaseKey,
         note: editNote.note,
       });
+      getNotes(editNote.appId).then(setNoteCards);
     }
   }, [editNote]);
-
-  useEffect(() => {
-    console.warn(setEditNote);
-    getAppFB(firebaseKey).then((appObj) => {
-      getNotes(appObj.appId).then((notes) => {
-        setNoteCards(notes);
-      });
-    });
-  }, []);
 
   const resetForm = () => {
     setFormNote(initialState);
@@ -89,11 +81,9 @@ export default function NoteCardForm({ editNote, setEditNote, setNoteCards }) {
 
 NoteCardForm.propTypes = {
   editNote: PropTypes.shape(PropTypes.obj),
-  setEditNote: PropTypes.func,
   setNoteCards: PropTypes.func.isRequired,
 };
 
 NoteCardForm.defaultProps = {
   editNote: {},
-  setEditNote: null,
 };

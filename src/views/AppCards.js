@@ -6,6 +6,7 @@ import ApplicationCard from '../Components/ApplicationCard';
 export default function AppCards({ user }) {
   const [cards, setCards] = useState([]);
   const [categorizedCards, setCategorizedCards] = useState({});
+  const userRole = user.role;
 
   useEffect(() => {
     let isMounted = true;
@@ -41,7 +42,7 @@ export default function AppCards({ user }) {
       );
       return main;
     }, {});
-    console.warn('sort obj', sortedObj);
+
     setCategorizedCards(sortedObj);
   };
 
@@ -52,7 +53,7 @@ export default function AppCards({ user }) {
   return (
     <div className="container">
       {user ? (
-        <h5>Role APP CARD VIEW- {user.role}</h5>
+        <h5>Role APP CARD VIEW new val - {userRole}</h5>
       ) : (
         ' Role APP CARD VIEW-No Role'
       )}

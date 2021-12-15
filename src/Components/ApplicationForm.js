@@ -64,13 +64,13 @@ export default function ApplicationForm({ appobj, user }) {
     }));
   };
 
-  // const handleToggle = (e) => {
-  //   const { name, checked } = e.target;
-  //   setFormInput((prevState) => ({
-  //     ...prevState,
-  //     [name]: checked,
-  //   }));
-  // };
+  const handleToggle = (e) => {
+    const { name, checked } = e.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -160,7 +160,8 @@ export default function ApplicationForm({ appobj, user }) {
               />
             </Form.Group>
           </Row>
-          {/* {user?.role === 'Admin' || user?.role === 'Staff' ? (
+          {(user != null && user.role === 'Admin')
+          || (user != null && user.role === 'Staff') ? (
             <Row className="mb-3 d-flex" width="75%">
               <label htmlFor="status">Status</label>
               <select
@@ -177,10 +178,11 @@ export default function ApplicationForm({ appobj, user }) {
                 <option value="4">Approved</option>
               </select>
             </Row>
-          ) : (
-            ''
-          )} */}
-          {/* {user?.role === 'Admin' || user?.role === 'Staff' ? (
+            ) : (
+              ''
+            )}
+          {(user != null && user.role === 'Admin')
+          || (user != null && user.role === 'Staff') ? (
             <label htmlFor="drawingReceived">
               <input
                 id="drawingReceived"
@@ -191,10 +193,11 @@ export default function ApplicationForm({ appobj, user }) {
               />
               Drawings Received?
             </label>
-          ) : (
-            ''
-          )} */}
-          {/* {user?.role === 'Admin' || user.role === 'Staff' ? (
+            ) : (
+              ''
+            )}
+          {(user != null && user.role === 'Admin')
+          || (user != null && user.role === 'Staff') ? (
             <Row className="mb-3 d-flex" width="75%">
               <Form.Group>
                 <Form.Label htmlFor="dateReceived">Date Received</Form.Label>
@@ -208,9 +211,9 @@ export default function ApplicationForm({ appobj, user }) {
                 />
               </Form.Group>
             </Row>
-          ) : (
-            ''
-          )} */}
+            ) : (
+              ''
+            )}
           <div className="mb-3 d-flex">
             <button className="btn btn-success" type="submit">
               {appobj?.firebaseKey ? 'Update' : 'Submit'}
