@@ -43,7 +43,6 @@ function Initialize() {
   return (
     <div className="App">
       <>
-        {user ? <h5>{user.fullName} </h5> : ''};
         <Navigation user={user} />
         <Routes user={user} />
         {/* <SignIn user={userInfoObj} /> */}

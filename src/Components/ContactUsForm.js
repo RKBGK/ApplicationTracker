@@ -1,10 +1,8 @@
 import emailjs from 'emailjs-com';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Card } from 'react-bootstrap';
 import createContact from '../api/data/contactData';
-// import Homeconstruction from '../Images/Homeconstruction.jpg';
-// background-image: url(../Images/Homeconstruction.jpg);
-// div style={{ backgroundImage: `url(${Homeconstruction})` }}
 
 const ContactUsForm = styled.form`
   display: flex;
@@ -14,11 +12,7 @@ const ContactUsForm = styled.form`
   margin: 10px;
   box-shadow: 10px,
   border: 2px solid red;
-  width: 300px;
-  height: 400px;
   padding: 50px;
-  border: 1px solid red;
-  box-sizing: border-box;
 `;
 const initialState = {
   name: '',
@@ -71,57 +65,73 @@ export default function ContactForm() {
     <div>
       {showForm ? (
         <ContactUsForm onSubmit={sendEmail}>
-          <div className="m-3">
-            <label htmlFor="name" className="form-label visually-hidden">
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              value={formInput.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="m-3">
-            <label htmlFor="email" className="form-label visually-hidden">
-              email
-            </label>
-            <input
-              className="form-control"
-              id="email"
-              type="email"
-              rows="3"
-              name="email"
-              value={formInput.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="m-3">
-            <label htmlFor="comment" className="form-label visually-hidden">
-              comment
-            </label>
-            <textarea
-              className="form-control"
-              id="comment"
-              rows="3"
-              name="comment"
-              value={formInput.comment}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="m-3">
-            <button type="submit" className="btn btn-success">
-              Submit
-            </button>
-          </div>
+          <Card
+            body
+            style={{ width: '80%', backgroundColor: 'rgb(213, 248, 248)' }}
+          >
+            <div className="m-3">
+              <label htmlFor="name" className="form-label visually-hidden">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                name="name"
+                value={formInput.name}
+                onChange={handleChange}
+                style={{ width: '100%' }}
+                required
+              />
+            </div>
+            <div className="m-3">
+              <label htmlFor="email" className="form-label visually-hidden">
+                email
+              </label>
+              <input
+                className="form-control"
+                id="email"
+                type="email"
+                rows="3"
+                name="email"
+                value={formInput.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="m-3">
+              <label htmlFor="comment" className="form-label visually-hidden">
+                comment
+              </label>
+              <textarea
+                className="form-control"
+                id="comment"
+                rows="3"
+                name="comment"
+                value={formInput.comment}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </Card>
+          <Card>
+            <div className="m-3">
+              <button type="submit" className="btn btn-success">
+                Submit
+              </button>
+            </div>
+          </Card>
         </ContactUsForm>
       ) : (
-        <h5>Thank you</h5>
+        <Card
+          className="homebtnStyle"
+          body
+          style={{ width: '80%', backgroundColor: 'rgb(213, 248, 248)' }}
+        >
+          <h5>
+            Thank you for contacting us. We will get back to you in 24-48 hours.
+          </h5>
+        </Card>
       )}
     </div>
   );

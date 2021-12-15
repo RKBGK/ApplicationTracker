@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// import styled from 'styled-components';
+// import { Card } from 'react-bootstrap';
 // import { getAppFB } from '../api/data/appData';
 import { createNote, getNotes, updateNote } from '../api/data/noteData';
 
 const initialState = {
   note: '',
 };
+// const Dnote = styled.form`
+//   display: flex;
+//   flex-direction: column;
+//   padding-top: 10px;
+//   height: 30vmin;
+//   width: 70%;
+//   top: 20%;
+//   margin-left: 20px;
+//   h2 {
+//     text-align: center;
+//   }
+// `;
 
-export default function NoteCardForm({ editNote, setNoteCards }) {
+export default function NoteCardForm({ editNote, setNoteCards, setEditNote }) {
   const [formNote, setFormNote] = useState(initialState);
   const { firebaseKey } = useParams();
 
@@ -25,6 +39,7 @@ export default function NoteCardForm({ editNote, setNoteCards }) {
 
   const resetForm = () => {
     setFormNote(initialState);
+    setEditNote({});
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,6 +80,7 @@ export default function NoteCardForm({ editNote, setNoteCards }) {
               name="note"
               value={formNote.note}
               onChange={handleChange}
+              style={{ width: '50%' }}
               required
             />
           </div>
@@ -82,6 +98,7 @@ export default function NoteCardForm({ editNote, setNoteCards }) {
 NoteCardForm.propTypes = {
   editNote: PropTypes.shape(PropTypes.obj),
   setNoteCards: PropTypes.func.isRequired,
+  setEditNote: PropTypes.func.isRequired,
 };
 
 NoteCardForm.defaultProps = {

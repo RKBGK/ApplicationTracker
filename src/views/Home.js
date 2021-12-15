@@ -1,8 +1,29 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import '../styles/globals/home.scss';
+// import styled from 'styled-components';
+import { Card } from 'react-bootstrap';
 // import ApplicationForm from '../Components/ApplicationForm';
 // import StatusCheck from '../Components/StatusCheck';
+// const HomeButton = styled.form`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   margin: auto;
+//   padding-top: 50px;
+//   height: 30vmin;
+//   width: 70%;
+//   position: absolute;
+//   top: 20%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//     z-index: 9;
+//   margin: 20px;
+
+//   h2 {
+//     text-align: center;
+//   }
+// `;
 
 export default function Home() {
   const history = useHistory();
@@ -14,20 +35,38 @@ export default function Home() {
   // };
   return (
     <div className="homebtnStyle">
-      <button
-        className="btn btn-success"
-        type="submit"
-        onClick={() => history.push('/application')}
+      <Card
+        body
+        style={{
+          width: '80%',
+          backgroundColor: 'rgb(213, 248, 248)',
+          border: '0px',
+        }}
       >
-        Start Application
-      </button>
-      <button
-        className="btn btn-success"
-        type="submit"
-        onClick={() => history.push('statuscheck')}
+        <button
+          className="btn btn-light"
+          type="submit"
+          onClick={() => history.push('/application')}
+        >
+          Start Application
+        </button>
+      </Card>
+      <Card
+        body
+        style={{
+          width: '80%',
+          backgroundColor: 'rgb(213, 248, 248)',
+          border: '0px',
+        }}
       >
-        Check Application Status
-      </button>
+        <button
+          className="btn btn-light"
+          type="submit"
+          onClick={() => history.push('statuscheck')}
+        >
+          Check Application Status
+        </button>
+      </Card>
     </div>
   );
 }
