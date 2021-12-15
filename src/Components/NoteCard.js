@@ -7,7 +7,6 @@ export default function NoteCard({ noteObj, setNoteCards, setEditNote }) {
   const deleteNoteObj = () => {
     deleteNote(noteObj).then(setNoteCards);
   };
-  console.warn(setEditNote);
 
   return (
     <div>

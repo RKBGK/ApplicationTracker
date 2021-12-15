@@ -27,7 +27,6 @@ export default function AppDetail() {
   // since need to track change in notcard separately, created a new useeffect
   useEffect(() => {
     let isMounted = true;
-    console.warn(firebaseKey);
     getNotes(firebaseKey).then((notes) => {
       if (isMounted) setNoteCards(notes);
     });
@@ -45,7 +44,6 @@ export default function AppDetail() {
     setFormNote(initialState);
   };
   const handleSubmit = (e) => {
-    // console.warn(e.noteobj.value);
     e.preventDefault();
     createNote({ ...formNote, appId: card.firebaseKey }).then((notes) => {
       setNoteCards(notes);

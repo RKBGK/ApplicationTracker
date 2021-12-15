@@ -7,8 +7,6 @@ import { getNotes } from '../api/data/noteData';
 export default function NoteCardList({ setEditNote, noteCards, setNoteCards }) {
   // const [noteCards, setNoteCards] = useState([]);
   const { firebaseKey } = useParams();
-  console.warn('NoteCardList', firebaseKey);
-  // debugger;
   useEffect(() => {
     let isMounted = true;
     getNotes(firebaseKey).then((notes) => {
@@ -18,10 +16,6 @@ export default function NoteCardList({ setEditNote, noteCards, setNoteCards }) {
       isMounted = false;
     }; // cleanup function
   }, []);
-
-  // useEffect(() => {
-  //   setNoteCards(noteCards);
-  // }, []);
 
   return (
     <div className="card" style={{ width: '18rem', margin: '3px' }}>

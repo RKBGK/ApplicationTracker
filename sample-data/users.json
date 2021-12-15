@@ -1,23 +1,23 @@
-{ 
-  "user1": {
-    "name": "user1",
-    "firebaseKey":"user1",
-    "email": "rubiblr@gmail.com",
-    "role": "Reviewer",
-    "DateEntered": "11/30/2021"
-  },
-  "user2": {
-    "name": "user2",
-    "firebaseKey":"user2",
-    "email": "rubiblr@yahoo.com",
+{
+  "-Mq_x-zvpSKViVrLF8Wq": {
+    "email": "kaur.ruby2020@gmail.com",
+    "firebaseKey": "-Mq_x-zvpSKViVrLF8Wq",
+    "fullName": "Rk2020",
     "role": "Client",
-    "DateEntered": "11/30/2021"
+    "uid": "ddVswRAQRsMUH9TI3kbj2nw1aF63"
   },
-  "user3": {
-    "name": "user3",
-    "firebaseKey":"user3",
-    "email": "abc@yahoo.com",
-    "role": "Approver",
-    "DateEntered": "11/30/2021"
+  "-MqkyE2V1ttBxu328erq": {
+    "email": "kaur.ruby2020@gmail.com",
+    "firebaseKey": "-MqkyE2V1ttBxu328erq",
+    "fullName": "Admin",
+    "role": "Admin",
+    "uid": "WL0zxRRH3LZE4iMSmkqhR6meYh82"
+  },
+  "-Mqkyj4GY5tGutC8CPBT": {
+    "email": "ruby.kaur2021@gmail.com",
+    "firebaseKey": "-Mqkyj4GY5tGutC8CPBT",
+    "fullName": "Staff",
+    "role": "Staff",
+    "uid": "UITThHYGjoTomHhZKmUZJzkEU2Y2"
   }
 }

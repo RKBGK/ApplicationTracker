@@ -1,6 +1,9 @@
 import axios from 'axios';
+import firebase from 'firebase/app';
 import firebaseConfig from '../apiKeys';
 
+const getCurrentUsersUid = () => firebase.auth().currentUser?.uid;
+console.warn('user', getCurrentUsersUid);
 const baseURL = firebaseConfig.databaseURL;
 const getUserEmail = (useremail) => new Promise((resolve, reject) => {
   axios
@@ -34,4 +37,6 @@ const checkUserExists = (user) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
-export { getUserEmail, createUser, checkUserExists };
+export {
+  getUserEmail, createUser, checkUserExists, getCurrentUsersUid,
+};

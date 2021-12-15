@@ -6,7 +6,11 @@ import AdminRoutes from './AdminRoutes';
 export default function Routes({ user }) {
   return (
     <>
-      {user?.isAdmin && <AdminRoutes user={user} />}
+      {user?.role === 'Admin' || user?.role === 'Staff' ? (
+        <AdminRoutes user={user} />
+      ) : (
+        ''
+      )}
       <UnauthenticatedRoutes user={user} />
     </>
   );

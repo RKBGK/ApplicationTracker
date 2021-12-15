@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { deleteApp } from '../api/data/appData';
+import { deleteApp, getAppEmail } from '../api/data/appData';
 
 // import { useHistory } from 'react-router';
 
-export default function ApplicationCard({ card, setCards }) {
+export default function ApplicationCard({ card, setCards, user }) {
   const renderSwitch = () => {
     switch (card.status) {
       case '1':
@@ -21,11 +21,26 @@ export default function ApplicationCard({ card, setCards }) {
     }
   };
 
+  // const handleClick = (method) => {
+  //   if (method === 'delete') {
+  //     deleteApp(card).then(setCards);
+  //   }
+  // };
+
   const handleClick = (method) => {
     if (method === 'delete') {
-      deleteApp(card).then(setCards);
+      deleteApp(card).then(() => {
+        getAppEmail(card.email).then((apps) => {
+          setCards(apps);
+        });
+      });
     }
   };
+  // getAppFB(firebaseKey).then((appObj) => {
+  //   getNotes(appObj.appId).then((notes) => {
+  //     setNoteCards(notes);
+  //   });
+  // });
 
   return (
     <div>
@@ -34,23 +49,43 @@ export default function ApplicationCard({ card, setCards }) {
           <h5 className="card-title">{card.name}</h5>
           <h5 className="card-title">{card.address}</h5>
           <h5 className="card-title">{card.email}</h5>
+          <h5 className="card-title">{card.status}</h5>
           <h5 className="card-title">{renderSwitch(card.status)}</h5>
-          <Link to={`/editapp/${card.firebaseKey}`} className="btn btn-warning">
-            Edit
-          </Link>
-          <Link
-            to={`/detailapp/${card.firebaseKey}`}
-            className="btn btn-warning"
-          >
-            Detail
-          </Link>
-          <button
-            onClick={() => handleClick('delete')}
-            className="btn btn-danger"
-            type="button"
-          >
-            DELETE
-          </button>
+          {(user != null && user.role === 'Admin')
+          || (user != null && user.role === 'Staff') ? (
+            <Link
+              to={`/editapp/${card.firebaseKey}`}
+              className="btn btn-warning"
+            >
+              Edit
+            </Link>
+            ) : (
+              ''
+            )}
+          {(user != null && user.role === 'Admin')
+          || (user != null && user.role === 'Staff') ? (
+            <Link
+              to={`/detailapp/${card.firebaseKey}`}
+              className="btn btn-warning"
+            >
+              Detail
+            </Link>
+            ) : (
+              ''
+            )}
+          <div>
+            {card.status === '1' ? (
+              <button
+                onClick={() => handleClick('delete')}
+                className="btn btn-danger"
+                type="button"
+              >
+                DELETE
+              </button>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -60,4 +95,9 @@ export default function ApplicationCard({ card, setCards }) {
 ApplicationCard.propTypes = {
   card: PropTypes.shape(PropTypes.obj).isRequired,
   setCards: PropTypes.func.isRequired,
+  user: PropTypes.shape(PropTypes.obj),
+};
+
+ApplicationCard.defaultProps = {
+  user: null,
 };

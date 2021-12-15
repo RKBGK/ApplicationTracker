@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import '../styles/globals/home.scss';
 // import ApplicationForm from '../Components/ApplicationForm';
 // import StatusCheck from '../Components/StatusCheck';
 
@@ -12,7 +13,7 @@ export default function Home() {
   //   <Link to="/statuscheck" component={StatusCheck} />;
   // };
   return (
-    <div>
+    <div className="homebtnStyle">
       <button
         className="btn btn-success"
         type="submit"
