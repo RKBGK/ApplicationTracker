@@ -37,6 +37,7 @@ export default function DetailAppCard() {
       image: card.image,
       drawingReceived: !card.drawingReceived,
       dateReceived: card.dateReceived,
+      imageUrl: card.imageUrl,
     };
     updateAppFB(drawingcard).then(setCard);
   };
@@ -55,6 +56,7 @@ export default function DetailAppCard() {
       image: card.image,
       drawingReceived: card.drawingReceived,
       dateReceived: card.dateReceived,
+      imageUrl: card.imageUrl,
     };
     updateAppFB(drawingcard).then(setCard);
   };
@@ -65,6 +67,7 @@ export default function DetailAppCard() {
           <Hstyle className="card-title">{card.name}</Hstyle>
           <Hstyle className="card-title">{card.address}</Hstyle>
           <Hstyle className="card-title">{card.email}</Hstyle>
+          <Hstyle className="card-title">{card.details}</Hstyle>
           <Hstyle className="card-title">{card.details}</Hstyle>
           <div>
             <label>
@@ -90,6 +93,12 @@ export default function DetailAppCard() {
             <option value="3">Rejected</option>
             <option value="4">Approved</option>
           </select>
+          <img
+            src={card.imageUrl}
+            alt="gfg-logo"
+            width="200px"
+            height="200px"
+          />
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Form, Row, Card } from 'react-bootstrap';
 // import { Dropdown } from 'semantic-ui-react';
 import { updateApp, createApp } from '../api/data/appData';
+import uploadImage from '../api/data/cloudnaryData';
 
 const AppForm = styled.form`
   display: flex;
@@ -43,13 +44,16 @@ const initialState = {
   image: '',
   drawingReceived: false,
   dateReceived: today,
+  imgname: '',
+  imageUrl: '',
 };
 
 export default function ApplicationForm({ appobj, user }) {
   const [formInput, setFormInput] = useState(initialState);
   const [showForm, setShowForm] = useState(true);
+  const [imageState, setImageState] = useState(null);
   const history = useHistory();
-  // const [checked, setChecked] = useState();
+  const handleImageChange = (e) => setImageState(e.target.files[0]);
   useEffect(() => {
     if (appobj.firebaseKey) {
       setFormInput({
@@ -63,6 +67,8 @@ export default function ApplicationForm({ appobj, user }) {
         image: appobj.image,
         drawingReceived: appobj.drawingReceived,
         dateReceived: appobj.dateReceived,
+        imgname: appobj.imgname,
+        imageUrl: appobj.imageUrl,
       });
     }
   }, [appobj]);
@@ -88,14 +94,24 @@ export default function ApplicationForm({ appobj, user }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (appobj.firebaseKey) {
-      updateApp(formInput).then(() => {
-        resetForm();
-      });
+    if (appobj?.firebaseKey) {
+      if (imageState) {
+        uploadImage(imageState).then((imageUrl) => {
+          updateApp(appobj.firebaseKey, {
+            ...formInput,
+            imageUrl,
+          }).then(() => resetForm());
+        });
+      } else {
+        updateApp(appobj.firebaseKey, { ...formInput }).then(() => resetForm());
+      }
     } else {
-      createApp({ ...formInput }).then(() => {
-        resetForm();
+      uploadImage(imageState).then((imageUrl) => {
+        createApp({ ...formInput, imageUrl }).then(() => resetForm());
       });
+      // } else {
+      //   alert('Please upload an image and a name to submit');
+      // }
     }
     setShowForm(false);
   };
@@ -224,21 +240,34 @@ export default function ApplicationForm({ appobj, user }) {
               ) : (
                 ''
               )}
-
-            {/* <DropdownButton
-              align="end"
-              title="Status"
-              id="status"
-              htmlFor="status"
-              name="status"
-              value={formInput.status}
+            <br />
+            <label htmlFor="imgname">Image Name</label>
+            <input
               onChange={handleChange}
+              id="imgname"
+              value={formInput.imgname}
+            />
+            <br />
+            <div
+              style={{
+                height: '200px',
+                width: '200px',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                alignSelf: 'center',
+                backgroundImage: `url(${
+                  imageState
+                    ? URL.createObjectURL(imageState)
+                    : formInput.imageUrl
+                      || 'https://i.stack.imgur.com/y9DpT.jpg'
+                })`,
+              }}
             >
-              <Dropdown.Item eventKey="1">Pending</Dropdown.Item>
-              <Dropdown.Item eventKey="2">In-Review</Dropdown.Item>
-              <Dropdown.Item eventKey="3">Rejected</Dropdown.Item>
-              <Dropdown.Item eventKey="4">Approved</Dropdown.Item>
-            </DropdownButton> */}
+              <h5>&apos;`</h5>
+            </div>
+            <input onChange={handleImageChange} type="file" accept="image/*" />
+            <br />
 
             <div className="mb-3 d-flex" style={{ padding: '25%' }}>
               <button className="btn btn-success" type="submit">
@@ -280,6 +309,8 @@ ApplicationForm.propTypes = {
     image: PropTypes.string,
     drawingReceived: PropTypes.bool,
     dateReceived: PropTypes.string,
+    imgname: PropTypes.string,
+    imageUrl: PropTypes.string,
   }),
   user: PropTypes.shape(PropTypes.obj),
 };

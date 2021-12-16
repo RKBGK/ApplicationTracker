@@ -7,6 +7,8 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+  cloudinaryURL: process.env.REACT_APP_CLOUDINARY_URL,
+  cloudinaryPreset: process.env.REACT_APP_CLOUDINARY_PRESET,
 };
 
 export default firebaseConfig;
