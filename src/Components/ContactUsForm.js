@@ -69,6 +69,7 @@ export default function ContactForm() {
             body
             style={{ width: '80%', backgroundColor: 'rgb(213, 248, 248)' }}
           >
+            <h1>Please submit your question </h1>
             <div className="m-3">
               <label htmlFor="name" className="form-label visually-hidden">
                 Name
@@ -76,6 +77,7 @@ export default function ContactForm() {
               <input
                 type="text"
                 className="form-control"
+                placeholder="Name"
                 id="name"
                 name="name"
                 value={formInput.name}
@@ -91,6 +93,7 @@ export default function ContactForm() {
               <input
                 className="form-control"
                 id="email"
+                placeholder="Email"
                 type="email"
                 rows="3"
                 name="email"
@@ -106,6 +109,7 @@ export default function ContactForm() {
               <textarea
                 className="form-control"
                 id="comment"
+                placeholder="Please enter your message"
                 rows="3"
                 name="comment"
                 value={formInput.comment}
