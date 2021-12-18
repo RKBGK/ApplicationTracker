@@ -22,7 +22,7 @@ export default function AppCards({ user }) {
       case '1':
         return 'Pending';
       case '2':
-        return 'In-Review';
+        return 'In-progress';
       case '3':
         return 'Rejected';
       case '4':
@@ -54,7 +54,9 @@ export default function AppCards({ user }) {
       <div>
         {Object.keys(categorizedCards).map((status) => (
           <div key={status}>
-            <h2>{renderSwitch(status)}</h2>
+            <h3>
+              {renderSwitch(status)} - {categorizedCards[status].length}
+            </h3>
             {categorizedCards[status].map((card) => (
               <ApplicationCard
                 key={card.firebaseKey}

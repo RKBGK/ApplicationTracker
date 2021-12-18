@@ -3,7 +3,6 @@ import firebase from 'firebase/app';
 import firebaseConfig from '../apiKeys';
 
 const getCurrentUsersUid = () => firebase.auth().currentUser?.uid;
-console.warn('user', getCurrentUsersUid);
 const baseURL = firebaseConfig.databaseURL;
 const getUserEmail = (useremail) => new Promise((resolve, reject) => {
   axios
