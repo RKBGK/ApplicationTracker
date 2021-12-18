@@ -64,7 +64,6 @@ export default function ApplicationForm({ appobj, user }) {
         details: appobj.details,
         status: appobj.status,
         phone: appobj.phone,
-        image: appobj.image,
         drawingReceived: appobj.drawingReceived,
         dateReceived: appobj.dateReceived,
         imgname: appobj.imgname,
@@ -94,17 +93,13 @@ export default function ApplicationForm({ appobj, user }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (appobj?.firebaseKey) {
-      if (imageState) {
-        uploadImage(imageState).then((imageUrl) => {
-          updateApp(appobj.firebaseKey, {
-            ...formInput,
-            imageUrl,
-          }).then(() => resetForm());
-        });
-      } else {
-        updateApp(appobj.firebaseKey, { ...formInput }).then(() => resetForm());
-      }
+    if (appobj.firebaseKey) {
+      uploadImage(imageState).then((imageUrl) => {
+        updateApp({
+          ...formInput,
+          imageUrl,
+        }).then(() => resetForm());
+      });
     } else {
       uploadImage(imageState).then((imageUrl) => {
         createApp({ ...formInput, imageUrl }).then(() => resetForm());

@@ -4,3 +4,15 @@
 body {
   background-color: $favColor !important;
 }
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px; 
+  grid-template-rows: 100px;
+  grid-column-gap: 5px;
+}
+
+.item {
+background: #ce8888;
+
+ 
+}

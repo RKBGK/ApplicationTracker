@@ -34,9 +34,9 @@ export default function DetailAppCard() {
       details: card.details,
       status: card.status,
       phone: card.phone,
-      image: card.image,
       drawingReceived: !card.drawingReceived,
       dateReceived: card.dateReceived,
+      imgname: card.imgname,
       imageUrl: card.imageUrl,
     };
     updateAppFB(drawingcard).then(setCard);
@@ -50,12 +50,12 @@ export default function DetailAppCard() {
       address: card.address,
       firebaseKey: card.firebaseKey,
       details: card.details,
-      //   status: card.status,
+      // status: card.status,
       [name]: value,
       phone: card.phone,
-      image: card.image,
       drawingReceived: card.drawingReceived,
       dateReceived: card.dateReceived,
+      image: card.image,
       imageUrl: card.imageUrl,
     };
     updateAppFB(drawingcard).then(setCard);
@@ -67,7 +67,6 @@ export default function DetailAppCard() {
           <Hstyle className="card-title">{card.name}</Hstyle>
           <Hstyle className="card-title">{card.address}</Hstyle>
           <Hstyle className="card-title">{card.email}</Hstyle>
-          <Hstyle className="card-title">{card.details}</Hstyle>
           <Hstyle className="card-title">{card.details}</Hstyle>
           <div>
             <label>
