@@ -63,7 +63,7 @@ export default function ApplicationCard({ card, setCards, user }) {
           <Hstyle className="card-title">{card.address}</Hstyle>
           <Hstyle className="card-title">{card.email}</Hstyle>
           <Hstyle className="card-title">{renderSwitch(card.status)}</Hstyle>
-          {user?.role !== 'Client' ? (
+          {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Link to={`/editapp/${card.firebaseKey}`} className="btn btn-light">
               <Icon name="edit" />
             </Link>

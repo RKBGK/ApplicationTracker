@@ -18,9 +18,9 @@ export default function Navigation({ user }) {
           <Link className="navbar-brand" to="/">
             Home
           </Link>
-          <Link className="navbar-brand" to="/about">
+          {/* <Link className="navbar-brand" to="/about">
             About
-          </Link>
+          </Link> */}
           <Link className="navbar-brand" to="/contactUs">
             Contact Us
           </Link>
@@ -37,13 +37,13 @@ export default function Navigation({ user }) {
           ) : (
             ''
           )}
-          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+          {/* {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Link className="navbar-brand" to="/employees">
               Employees
             </Link>
           ) : (
             ''
-          )}
+          )} */}
           {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Link className="navbar-brand" to="/summary">
               Summary
@@ -51,13 +51,13 @@ export default function Navigation({ user }) {
           ) : (
             ''
           )}
-          {user?.role === 'Admin' || user?.role === 'Staff' ? (
+          {/* {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Link className="navbar-brand" to="/reports">
               Reports
             </Link>
           ) : (
             ''
-          )}
+          )} */}
           {user?.uid ? (
             <button type="button" className="nav-link" onClick={signOutUser}>
               {user.fullName} Logout
