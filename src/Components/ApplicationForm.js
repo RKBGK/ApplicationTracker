@@ -94,12 +94,16 @@ export default function ApplicationForm({ appobj, user }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (appobj.firebaseKey) {
-      uploadImage(imageState).then((imageUrl) => {
-        updateApp({
-          ...formInput,
-          imageUrl,
-        }).then(() => resetForm());
-      });
+      if (imageState) {
+        uploadImage(imageState).then((imageUrl) => {
+          updateApp({
+            ...formInput,
+            imageUrl,
+          }).then(() => resetForm());
+        });
+      } else {
+        updateApp(formInput).then(() => resetForm());
+      }
     } else {
       uploadImage(imageState).then((imageUrl) => {
         createApp({ ...formInput, imageUrl }).then(() => resetForm());
