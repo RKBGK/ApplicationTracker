@@ -36,7 +36,6 @@ export default function StatusCheck() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h6>StatusCheck</h6>
         <div className="m-3">
           <label htmlFor="email" className="form-label visually-hidden">
             Enter Email

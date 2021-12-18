@@ -5,11 +5,20 @@ import ApplicationCard from '../Components/ApplicationCard';
 export default function Summary() {
   const [cards, setCards] = useState([]);
   const [categorizedCards, setCategorizedCards] = useState({});
-
+  // const calcsummary = (appArray) => {
+  //   const summary = appArray.reduce((statusCategory, statuscount) => {
+  //     const [status] = statuscount.status;
+  //     if (statusCategory[status] == null) statusCategory[status] = [];
+  //     statusCategory[status].push(statuscount);
+  //     return statusCategory;
+  //   }, {});
+  //   return summary;
+  // };
   useEffect(() => {
     let isMounted = true;
     getApps().then((cardsArray) => {
       if (isMounted) setCards(cardsArray);
+      // calcsummary(cardsArray);
     });
     return () => {
       isMounted = false;
@@ -30,16 +39,6 @@ export default function Summary() {
         return status;
     }
   };
-
-  // const calcsummary = (appArray) => {
-  //   const summary = appArray.reduce((statusCategory, statuscount) => {
-  //     const [status] = statuscount.status;
-  //     if (statusCategory[status] == null) statusCategory[status] = [];
-  //     statusCategory[status].push(statuscount);
-  //     return statusCategory;
-  //   }, {});
-  //   return summary;
-  // };
 
   const categoryGroups = () => {
     const sortedObj = cards.reduce((cardObject, currentObject) => {
