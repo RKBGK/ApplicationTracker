@@ -114,7 +114,6 @@ export default function ApplicationForm({ appobj, user }) {
     }
     setShowForm(false);
   };
-  console.warn(user);
   return (
     <div>
       {showForm ? (
@@ -230,7 +229,7 @@ export default function ApplicationForm({ appobj, user }) {
                   >
                     <option value="">Status</option>
                     <option value="1">Pending</option>
-                    <option value="2">In-Review</option>
+                    <option value="2">In-progress</option>
                     <option value="3">Rejected</option>
                     <option value="4">Approved</option>
                   </select>
@@ -240,13 +239,13 @@ export default function ApplicationForm({ appobj, user }) {
                 ''
               )}
             <br />
-            <label htmlFor="imgname">Image Name</label>
+            {/* <label htmlFor="imgname">Image Name</label>
             <input
               onChange={handleChange}
               id="imgname"
               value={formInput.imgname}
             />
-            <br />
+            <br /> */}
             <div
               style={{
                 height: '200px',
@@ -263,7 +262,7 @@ export default function ApplicationForm({ appobj, user }) {
                 })`,
               }}
             >
-              <h5>&apos;`</h5>
+              {/* <h5>&apos;`</h5> */}
             </div>
             <input onChange={handleImageChange} type="file" accept="image/*" />
             <br />
@@ -288,7 +287,10 @@ export default function ApplicationForm({ appobj, user }) {
             body
             style={{ width: '80%', backgroundColor: 'rgb(213, 248, 248)' }}
           >
-            <h5>Please email the drawings to appdrawings@gmail.com</h5>
+            <h5>
+              Thanks for submitting your application. You can check the status
+              online.{' '}
+            </h5>
           </Card>
         </AppForm>
       )}

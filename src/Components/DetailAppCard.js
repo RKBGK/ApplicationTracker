@@ -88,7 +88,7 @@ export default function DetailAppCard() {
           >
             <option value="">Status</option>
             <option value="1">Pending</option>
-            <option value="2">In-Review</option>
+            <option value="2">In-progress</option>
             <option value="3">Rejected</option>
             <option value="4">Approved</option>
           </select>

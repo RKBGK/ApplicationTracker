@@ -5,15 +5,16 @@ import ApplicationCard from '../Components/ApplicationCard';
 export default function Summary() {
   const [cards, setCards] = useState([]);
   const [categorizedCards, setCategorizedCards] = useState({});
-  // const calcsummary = (appArray) => {
+  //   const calcsummary = (appArray) => {
   //   const summary = appArray.reduce((statusCategory, statuscount) => {
   //     const [status] = statuscount.status;
-  //     if (statusCategory[status] == null) statusCategory[status] = [];
+  //     if (statusCategory[status] === null) statusCategory[status] = [];
   //     statusCategory[status].push(statuscount);
   //     return statusCategory;
   //   }, {});
   //   return summary;
   // };
+
   useEffect(() => {
     let isMounted = true;
     getApps().then((cardsArray) => {
@@ -30,7 +31,7 @@ export default function Summary() {
       case '1':
         return 'Pending';
       case '2':
-        return 'In-Review';
+        return 'In-progress';
       case '3':
         return 'Rejected';
       case '4':
@@ -49,9 +50,23 @@ export default function Summary() {
       );
       return main;
     }, {});
-
+    console.warn('sortedObj', sortedObj);
     setCategorizedCards(sortedObj);
   };
+  //   const calcsummary = (appArray) => {
+  //   const summary = appArray.reduce((statusCategory, statuscount) => {
+  //     const [status] = statuscount.status;
+  //     if (statusCategory[status] === null) statusCategory[status] = [];
+  //     statusCategory[status].push(statuscount);
+  //     return statusCategory;
+  //   }, {});
+  //   return summary;
+  // };
+  const chartData = () => Object.keys(categorizedCards).map((status) => [
+    renderSwitch(status),
+    categorizedCards[status].length,
+  ]);
+  console.warn(chartData());
 
   useEffect(() => {
     categoryGroups();
@@ -62,7 +77,9 @@ export default function Summary() {
       <div>
         {Object.keys(categorizedCards).map((status) => (
           <div key={status}>
-            <h2>{renderSwitch(status)}</h2>
+            <h2>
+              {renderSwitch(status)} {categorizedCards[status].length}{' '}
+            </h2>
             {categorizedCards[status].map((card) => (
               <ApplicationCard
                 key={card.firebaseKey}
