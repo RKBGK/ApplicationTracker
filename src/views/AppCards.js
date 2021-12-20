@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { getApps } from '../api/data/appData';
 import ApplicationCard from '../Components/ApplicationCard';
+
+const CardFlow = styled.form`
+  flex-wrap:nowrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  }
+`;
 
 export default function AppCards({ user }) {
   const [cards, setCards] = useState([]);
@@ -54,17 +63,19 @@ export default function AppCards({ user }) {
       <div>
         {Object.keys(categorizedCards).map((status) => (
           <div key={status}>
-            <h3>
+            <h4>
               {renderSwitch(status)} - {categorizedCards[status].length}
-            </h3>
-            {categorizedCards[status].map((card) => (
-              <ApplicationCard
-                key={card.firebaseKey}
-                card={card}
-                setCards={setCards}
-                user={user}
-              />
-            ))}
+            </h4>
+            <CardFlow>
+              {categorizedCards[status].map((card) => (
+                <ApplicationCard
+                  key={card.firebaseKey}
+                  card={card}
+                  setCards={setCards}
+                  user={user}
+                />
+              ))}
+            </CardFlow>
           </div>
         ))}
       </div>

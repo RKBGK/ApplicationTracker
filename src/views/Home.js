@@ -1,29 +1,29 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import '../styles/globals/home.scss';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
 // import ApplicationForm from '../Components/ApplicationForm';
 // import StatusCheck from '../Components/StatusCheck';
-// const HomeButton = styled.form`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   margin: auto;
-//   padding-top: 50px;
-//   height: 30vmin;
-//   width: 70%;
-//   position: absolute;
-//   top: 20%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//     z-index: 9;
-//   margin: 20px;
+const HomeButton = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding-top: 50px;
+  height: 30vmin;
+  width: 50%;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  margin: 20px;
 
-//   h2 {
-//     text-align: center;
-//   }
-// `;
+  h2 {
+    text-align: center;
+  }
+`;
 
 export default function Home() {
   const history = useHistory();
@@ -34,11 +34,11 @@ export default function Home() {
   //   <Link to="/statuscheck" component={StatusCheck} />;
   // };
   return (
-    <div className="homebtnStyle">
+    <HomeButton className="homebtnStyle">
       <Card
         body
         style={{
-          width: '80%',
+          width: '70%',
           backgroundColor: 'rgb(213, 248, 248)',
           border: '0px',
         }}
@@ -54,7 +54,7 @@ export default function Home() {
       <Card
         body
         style={{
-          width: '80%',
+          width: '70%',
           backgroundColor: 'rgb(213, 248, 248)',
           border: '0px',
         }}
@@ -67,6 +67,6 @@ export default function Home() {
           Check Application Status
         </button>
       </Card>
-    </div>
+    </HomeButton>
   );
 }
