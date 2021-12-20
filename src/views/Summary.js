@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getApps } from '../api/data/appData';
-import ApplicationCard from '../Components/ApplicationCard';
 
 export default function Summary() {
   const [cards, setCards] = useState([]);
   const [categorizedCards, setCategorizedCards] = useState({});
-  //   const calcsummary = (appArray) => {
-  //   const summary = appArray.reduce((statusCategory, statuscount) => {
-  //     const [status] = statuscount.status;
-  //     if (statusCategory[status] === null) statusCategory[status] = [];
-  //     statusCategory[status].push(statuscount);
-  //     return statusCategory;
-  //   }, {});
-  //   return summary;
-  // };
 
   useEffect(() => {
     let isMounted = true;
@@ -53,15 +43,7 @@ export default function Summary() {
     console.warn('sortedObj', sortedObj);
     setCategorizedCards(sortedObj);
   };
-  //   const calcsummary = (appArray) => {
-  //   const summary = appArray.reduce((statusCategory, statuscount) => {
-  //     const [status] = statuscount.status;
-  //     if (statusCategory[status] === null) statusCategory[status] = [];
-  //     statusCategory[status].push(statuscount);
-  //     return statusCategory;
-  //   }, {});
-  //   return summary;
-  // };
+
   const chartData = () => Object.keys(categorizedCards).map((status) => [
     renderSwitch(status),
     categorizedCards[status].length,
@@ -73,20 +55,13 @@ export default function Summary() {
   }, [cards]);
 
   return (
-    <div className="container">
+    <div className="summary">
       <div>
         {Object.keys(categorizedCards).map((status) => (
           <div key={status}>
             <h2>
-              {renderSwitch(status)} {categorizedCards[status].length}{' '}
+              {renderSwitch(status)} {categorizedCards[status].length}
             </h2>
-            {categorizedCards[status].map((card) => (
-              <ApplicationCard
-                key={card.firebaseKey}
-                card={card}
-                setCards={setCards}
-              />
-            ))}
           </div>
         ))}
       </div>

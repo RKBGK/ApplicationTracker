@@ -67,7 +67,7 @@ export default function ContactForm() {
         <ContactUsForm onSubmit={sendEmail}>
           <Card
             body
-            style={{ width: '80%', backgroundColor: 'rgb(213, 248, 248)' }}
+            style={{ width: '50%', backgroundColor: 'rgb(213, 248, 248)' }}
           >
             <h1>Please submit your question </h1>
             <div className="m-3">

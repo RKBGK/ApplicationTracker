@@ -120,7 +120,7 @@ export default function ApplicationForm({ appobj, user }) {
         <AppForm onSubmit={handleSubmit}>
           <Card
             body
-            style={{ width: '80%', backgroundColor: 'rgb(213, 248, 248)' }}
+            style={{ width: '60%', backgroundColor: 'rgb(213, 248, 248)' }}
           >
             <Row className="mb-3 d-flex">
               <Form.Group>
