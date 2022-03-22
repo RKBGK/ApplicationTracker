@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
 import createContact from '../api/data/contactData';
+import '../styles/contactUs.scss';
 
 const ContactUsForm = styled.form`
   display: flex;
@@ -65,11 +66,8 @@ export default function ContactForm() {
     <div>
       {showForm ? (
         <ContactUsForm onSubmit={sendEmail}>
-          <Card
-            body
-            style={{ width: '50%', backgroundColor: 'rgb(213, 248, 248)' }}
-          >
-            <h1>Please submit your question </h1>
+          <Card className="contact-card">
+            <h2>Please submit your question </h2>
             <div className="m-3">
               <label htmlFor="name" className="form-label visually-hidden">
                 Name
@@ -82,7 +80,6 @@ export default function ContactForm() {
                 name="name"
                 value={formInput.name}
                 onChange={handleChange}
-                style={{ width: '100%' }}
                 required
               />
             </div>
@@ -107,7 +104,7 @@ export default function ContactForm() {
                 comment
               </label>
               <textarea
-                className="form-control"
+                className="form-control form-control-text"
                 id="comment"
                 placeholder="Please enter your message"
                 rows="3"
@@ -116,25 +113,24 @@ export default function ContactForm() {
                 onChange={handleChange}
                 required
               />
+              <button type="submit" className="frm-submit-button">
+                Submit
+              </button>
             </div>
           </Card>
-          <Card>
+          {/* <Card>
             <div className="m-3">
               <button type="submit" className="btn btn-success">
                 Submit
               </button>
             </div>
-          </Card>
+          </Card> */}
         </ContactUsForm>
       ) : (
-        <Card
-          className="homebtnStyle"
-          body
-          style={{ width: '80%', backgroundColor: 'rgb(213, 248, 248)' }}
-        >
-          <h5>
+        <Card className="contact-card">
+          <h2>
             Thank you for contacting us. We will get back to you in 24-48 hours.
-          </h5>
+          </h2>
         </Card>
       )}
     </div>

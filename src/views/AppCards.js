@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { getApps } from '../api/data/appData';
 import ApplicationCard from '../Components/ApplicationCard';
 
-const CardFlow = styled.form`
-  flex-wrap:nowrap;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display: flex;
-  }
-`;
+// const CardFlow = styled.form`
+//   display: flex;
+//   flex-wrap: nowrap;
+//   flex-direction: row;
+//   padding-top: 10px;
+//   padding-bottom: 10px;
+//   }
+// `;
 
 export default function AppCards({ user }) {
   const [cards, setCards] = useState([]);
@@ -66,7 +67,7 @@ export default function AppCards({ user }) {
             <h4>
               {renderSwitch(status)} - {categorizedCards[status].length}
             </h4>
-            <CardFlow>
+            <div className="appcard">
               {categorizedCards[status].map((card) => (
                 <ApplicationCard
                   key={card.firebaseKey}
@@ -75,7 +76,7 @@ export default function AppCards({ user }) {
                   user={user}
                 />
               ))}
-            </CardFlow>
+            </div>
           </div>
         ))}
       </div>

@@ -80,7 +80,7 @@ export default function NoteCardForm({ editNote, setNoteCards, setEditNote }) {
               name="note"
               value={formNote.note}
               onChange={handleChange}
-              style={{ width: '50%' }}
+              style={{ width: '300px' }}
               required
             />
           </div>

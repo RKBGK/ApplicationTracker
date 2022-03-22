@@ -6,6 +6,7 @@ import { Form, Row, Card } from 'react-bootstrap';
 // import { Dropdown } from 'semantic-ui-react';
 import { updateApp, createApp } from '../api/data/appData';
 import uploadImage from '../api/data/cloudnaryData';
+import '../styles/contactUs.scss';
 
 const AppForm = styled.form`
   display: flex;
@@ -14,7 +15,7 @@ const AppForm = styled.form`
   margin: auto;
   padding-top: 50px;
   height: 30vmin;
-  width: 70%;
+  width: 100%;
   position: absolute;
   top: 20%;
   left: 50%;
@@ -118,77 +119,72 @@ export default function ApplicationForm({ appobj, user }) {
     <div>
       {showForm ? (
         <AppForm onSubmit={handleSubmit}>
-          <Card
-            body
-            style={{ width: '60%', backgroundColor: 'rgb(213, 248, 248)' }}
-          >
+          <Row>
+            <h3>Please enter the information</h3>
+          </Row>
+          <Card className="app-form">
             <Row className="mb-3 d-flex">
               <Form.Group>
-                <Form.Label htmlFor="name">Name</Form.Label>
                 <Form.Control
+                  label="Drawing Received"
                   id="name"
                   name="name"
                   type="text"
                   placeholder="Enter First and Last Name"
                   onChange={handleChange}
                   value={formInput.name}
-                  style={{ width: '100%' }}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3 d-flex">
               <Form.Group>
-                <Form.Label htmlFor="email">Email</Form.Label>
                 <Form.Control
                   id="email"
+                  className="appform-control"
                   name="email"
                   type="email"
                   placeholder="Enter email"
                   onChange={handleChange}
                   value={formInput.email}
-                  style={{ width: '100%' }}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3 d-flex">
               <Form.Group>
-                <Form.Label htmlFor="address">Address</Form.Label>
                 <Form.Control
                   id="address"
+                  className="appform-control"
                   name="address"
                   type="text"
                   placeholder="Enter Address"
                   onChange={handleChange}
                   value={formInput.address}
-                  style={{ width: '100%' }}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3 d-flex">
               <Form.Group>
-                <Form.Label htmlFor="details">Details</Form.Label>
                 <Form.Control
                   id="details"
+                  className="appform-control"
                   name="details"
                   type="text"
                   placeholder="Please enter details"
                   onChange={handleChange}
                   value={formInput.details}
-                  style={{ width: '100%' }}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3 d-flex">
               <Form.Group>
-                <Form.Label htmlFor="phone">Phone</Form.Label>
                 <Form.Control
                   id="phone"
+                  className="appform-control"
                   name="phone"
                   type="text"
                   placeholder="Enter phone"
                   onChange={handleChange}
                   value={formInput.phone}
-                  style={{ width: '100%' }}
                 />
               </Form.Group>
             </Row>
@@ -199,6 +195,7 @@ export default function ApplicationForm({ appobj, user }) {
                   <Form.Check
                     htmlFor="drawingReceived"
                     id="drawingReceived"
+                    className="appform-control"
                     label="Drawing Received"
                     name="drawingReceived"
                     type="checkbox"
@@ -209,6 +206,7 @@ export default function ApplicationForm({ appobj, user }) {
                   <Form.Label htmlFor="dateReceived">Date Received</Form.Label>
                   <Form.Control
                     id="dateReceived"
+                    className="appform-control"
                     name="dateReceived"
                     type="text"
                     value={formInput.dateReceived}
@@ -221,6 +219,7 @@ export default function ApplicationForm({ appobj, user }) {
                   <label htmlFor="status">Status</label>
                   <select
                     id="status"
+                    className="appform-control"
                     name="status"
                     value={formInput.status}
                     placeholder="Select Status"
@@ -248,8 +247,8 @@ export default function ApplicationForm({ appobj, user }) {
             <br /> */}
             <div
               style={{
-                height: '200px',
-                width: '200px',
+                height: '20px',
+                width: '20px',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -267,7 +266,7 @@ export default function ApplicationForm({ appobj, user }) {
             <input onChange={handleImageChange} type="file" accept="image/*" />
             <br />
 
-            <div className="mb-3 d-flex" style={{ padding: '25%' }}>
+            <div className="mb-3 d-flex" style={{ padding: '10px' }}>
               <button className="btn btn-success" type="submit">
                 {appobj?.firebaseKey ? 'Update' : 'Submit'}
               </button>

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NoteCard from './NoteCard';
 import { getNotes } from '../api/data/noteData';
+import '../styles/noteCards.scss';
 
 export default function NoteCardList({ setEditNote, noteCards, setNoteCards }) {
   // const [noteCards, setNoteCards] = useState([]);
