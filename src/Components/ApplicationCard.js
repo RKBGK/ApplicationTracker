@@ -4,6 +4,7 @@ import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { deleteApp, getAppEmail, getApps } from '../api/data/appData';
+import '../styles/applicationCard.scss';
 
 const Hstyle = styled.form`
   h5 {
@@ -64,7 +65,10 @@ export default function ApplicationCard({ card, setCards, user }) {
           <Hstyle className="card-title">{card.email}</Hstyle>
           <Hstyle className="card-title">{renderSwitch(card.status)}</Hstyle>
           {user?.role === 'Admin' || user?.role === 'Staff' ? (
-            <Link to={`/editapp/${card.firebaseKey}`} className="btn btn-light">
+            <Link
+              to={`/editapp/${card.firebaseKey}`}
+              className="edit-btn card-btn"
+            >
               <Icon name="edit" />
             </Link>
           ) : (
@@ -73,7 +77,7 @@ export default function ApplicationCard({ card, setCards, user }) {
           {user?.role === 'Admin' || user?.role === 'Staff' ? (
             <Link
               to={`/detailapp/${card.firebaseKey}`}
-              className="btn btn-light"
+              className="detail-btn card-btn"
             >
               <Icon name="file outline" />
             </Link>
@@ -84,7 +88,7 @@ export default function ApplicationCard({ card, setCards, user }) {
           {card.status === '1' ? (
             <button
               onClick={() => handleClick('delete')}
-              className="btn btn-danger"
+              className="del-btn"
               type="button"
             >
               <Icon name="trash" />

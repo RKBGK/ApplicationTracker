@@ -11,8 +11,9 @@ body {
   grid-column-gap: 5px;
 }
 
-.item {
-background: #ce8888;
-
- 
+h2 {
+  color: $h1Color !important;
+  text-align: center;
+  padding-top: 15px;
+  margin-top: 30px;
 }

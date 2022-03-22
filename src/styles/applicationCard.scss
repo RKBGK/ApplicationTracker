@@ -1,0 +1,34 @@
+.edit-btn {
+    background-color: #00a5dc;
+    padding: 10px;
+    color: aliceblue;
+    border:none;
+    border-radius: 12px;    
+}
+.detail-btn {
+    background-color: #19ce5e;
+    padding: 10px;
+    color: aliceblue;
+    border:none;
+    border-radius: 12px;    
+}
+.del-btn {
+    background-color: red;
+    padding: 10px;
+    color: aliceblue;
+    border:none;
+    border-radius: 12px;    
+}
+.imglogo {
+    display: flex;
+    padding-right: 30px;
+}
+img.hover-zoom:hover {
+    transform: scale(25);
+  }
+.appcard {
+  display: flex;
+  flex-wrap: nwrap;
+  padding-top: 10px;
+  padding-bottom: 10px;  
+}

@@ -4,55 +4,57 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { signOutUser, signInUser } from '../api/auth';
 import Homeconstruction from '../Images/Logo.jpg';
+import '../styles/navBar.css';
 
 export default function Navigation({ user }) {
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-info">
-        <div
-          className="navbar-brand container-fluid"
-          href="#"
-          style={{ width: '5', height: '5' }}
-        >
-          <img src={Homeconstruction} alt="construction" />
-          <Link className="navbar-brand" to="/">
-            Home
-          </Link>
-          {/* <Link className="navbar-brand" to="/about">
+    <nav className="navbar flex-md-nowrap">
+      <div>
+        <Link className="navbar-brand" to="/">
+          <img
+            className="nav__logo"
+            src={Homeconstruction}
+            alt="construction"
+          />
+        </Link>
+      </div>
+      <div>
+        <ul className="nav nav-pills nav-fill">
+          {/* <Link className="nav-link" to="/about">
             About
           </Link> */}
-          <Link className="navbar-brand" to="/contactUs">
+          <Link className="nav-link" to="/contactUs">
             Contact Us
           </Link>
-          {/* <Link className="navbar-brand" to="/application">
-            Application
-          </Link> */}
-          {/* <Link className="navbar-brand" to="/reportchart">
+          <Link className="nav-link" to="/application">
+            Apply Permit
+          </Link>
+          {/* <Link className="nav-link" to="/reportchart">
             Report
           </Link> */}
           {user?.role === 'Admin' || user?.role === 'Staff' ? (
-            <Link className="navbar-brand" to="/appcard">
+            <Link className="nav-link" to="/appcard">
               Applications
             </Link>
           ) : (
             ''
           )}
           {/* {user?.role === 'Admin' || user?.role === 'Staff' ? (
-            <Link className="navbar-brand" to="/employees">
+            <Link className="nav-link" to="/employees">
               Employees
             </Link>
           ) : (
             ''
           )} */}
           {user?.role === 'Admin' || user?.role === 'Staff' ? (
-            <Link className="navbar-brand" to="/summary">
+            <Link className="nav-link" to="/summary">
               Summary
             </Link>
           ) : (
             ''
           )}
           {/* {user?.role === 'Admin' || user?.role === 'Staff' ? (
-            <Link className="navbar-brand" to="/reports">
+            <Link className="nav-link" to="/reports">
               Reports
             </Link>
           ) : (
@@ -65,7 +67,7 @@ export default function Navigation({ user }) {
           ) : (
             <button
               type="button"
-              className="nav-link active btn btn-link"
+              className="nav-link"
               onClick={signInUser}
               border="none"
             >
@@ -73,9 +75,9 @@ export default function Navigation({ user }) {
               {/* LogIn */}
             </button>
           )}
-        </div>
-      </nav>
-    </div>
+        </ul>
+      </div>
+    </nav>
   );
 }
 

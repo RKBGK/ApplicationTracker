@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { getAppFB, updateAppFB } from '../api/data/appData';
+import '../styles/applicationCard.scss';
 
 const Hstyle = styled.form`
   h5 {
@@ -68,16 +69,7 @@ export default function DetailAppCard() {
           <Hstyle className="card-title">{card.address}</Hstyle>
           <Hstyle className="card-title">{card.email}</Hstyle>
           <Hstyle className="card-title">{card.details}</Hstyle>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                checked={card.drawingReceived ? 'checked' : ''}
-                onChange={handleToggle}
-              />
-              Drawing Received
-            </label>
-          </div>
+
           <label htmlFor="status">Status</label>
           <select
             id="status"
@@ -92,12 +84,30 @@ export default function DetailAppCard() {
             <option value="3">Rejected</option>
             <option value="4">Approved</option>
           </select>
-          <img
-            src={card.imageUrl}
-            alt="gfg-logo"
-            width="200px"
-            height="200px"
-          />
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={card.drawingReceived ? 'checked' : ''}
+                onChange={handleToggle}
+              />
+              Drawing Received
+            </label>
+          </div>
+          {card.imageUrl != null ? (
+            <div className="imglogo">
+              <Hstyle>Click to open image: &nbsp; </Hstyle>
+              <img
+                src={card.imageUrl}
+                alt="gfg-logo"
+                width="20px"
+                height="20px"
+                className="hover-zoom"
+              />
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>

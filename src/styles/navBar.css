@@ -1,0 +1,44 @@
+ul {
+    background-color: #cd004b !important;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #cd004b !important;
+}
+
+.navbar__background {
+    background-color: #cd004b;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.nav__logo {
+    height: 30px;
+    margin-left: 40px;
+    background-color: transparent;
+}
+
+.navbar-brand {
+    color: white !important;
+    background-color: #cd004b !important;
+    border-left: 1px solid white !important;
+    border-radius: none;
+    height: 50px;
+    padding-top: 4.5px;
+}
+
+.navbar__logout {
+    line-height: 35px;
+}
+
+ul li:nth-child(7),
+.navbar__span {
+    background-color: #cd004b !important;
+    width: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
